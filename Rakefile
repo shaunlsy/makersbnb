@@ -1,16 +1,16 @@
 task default: %w[test_tables]
 
-# task :bundle do
-#   puts 'Installing bundle...'
-#   sh 'gem install bundler'
-# end
-#
-# task :gems => [:bundle] do
-#   puts 'Running bundle...'
-#   sh 'bundle'
-# end
+task :bundle do
+  puts 'Installing bundle...'
+  sh 'gem install bundler'
+end
 
-task :postgresql do
+task :gems => [:bundle] do
+  puts 'Running bundle...'
+  sh 'bundle'
+end
+
+task :postgresql => [:gems] do
   puts 'Installing postgresql...'
   sh 'brew install postgresql'
 end
