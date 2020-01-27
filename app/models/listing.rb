@@ -1,4 +1,4 @@
-class Listing 
+class Listing
 
   attr_reader :list_name, :list_id, :user_id, :username
 
@@ -9,7 +9,7 @@ class Listing
     @username = username
   end
 
-  def self.setup(dbname) 
+  def self.setup(dbname)
     @dbconnection = dbname
   end
 
@@ -17,5 +17,9 @@ class Listing
     listings = @dbconnection.command('SELECT list_name, listing_id, user_id, username FROM listings JOIN users ON (users.user_id=listings.listing_id)')
 
     listings.map{ |listing| self.new(listing['list_name'], listing['listing_id'], listing['user_id'], listing['username'])}
+  end
+
+  def self.create(list_name:, user_id:)
+    @dbconnection.command("INSERT INTO listings(list_name) VALUES('#{list_name}')")
   end
 end

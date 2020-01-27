@@ -20,10 +20,10 @@ Capybara.app = MakersbnbApp
 
 
 RSpec.configure do |config|
- 
+
   config.before(:each) do
-    
-  con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
+
+    con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
     # add test user
     user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
     user_id = user_id[0]['user_id']
@@ -31,6 +31,7 @@ RSpec.configure do |config|
     con.exec("INSERT INTO listings(list_name, user_id_fk) VALUES('Test lisitng 1', '#{user_id}') ;")
     # add test comments
   end
+
   config.after(:each) do
     con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
     # wipe database after test

@@ -8,6 +8,7 @@ require 'pg'
 
 # Models
 require 'database_connection'
+require 'listing'
 
 
 class MakersbnbApp < Sinatra::Base
@@ -17,6 +18,7 @@ class MakersbnbApp < Sinatra::Base
   set :public_folder, Proc.new { File.join(root, "../public") }
 
   DatabaseConnection.add_details(dbname: 'makersbnb', user: ENV['USER'], dbms: PG)
+  Listing.setup(DatabaseConnection)
 
   get '/' do
     erb :homepage
@@ -29,7 +31,7 @@ class MakersbnbApp < Sinatra::Base
   post '/listings' do
     erb :listings
   end
-  
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end
