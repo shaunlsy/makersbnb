@@ -1,22 +1,30 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/cpcwood/OneDrive/Documents/Coding/Projects/makersbnb/app/controllers/app_controller.rb": [
+      "/Users/student/Documents/Projects/week6-makersbnb/Makersbnb--Lucky-Apocalypse/app/controllers/app_controller.rb": [
         1,
         1,
         1,
         null,
         null,
         1,
+        1,
         null,
         null,
+        1,
         null,
+        null,
+        1,
+        null,
+        1,
+        4,
+        10,
         null,
         1,
         null,
         1,
         2,
-        4,
+        null,
         null,
         1,
         1,
@@ -26,7 +34,51 @@
         1,
         null
       ],
-      "/Users/cpcwood/OneDrive/Documents/Coding/Projects/makersbnb/spec/backend/feature/infastructure_spec.rb": [
+      "/Users/student/Documents/Projects/week6-makersbnb/Makersbnb--Lucky-Apocalypse/lib/database_connection.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        0,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/student/Documents/Projects/week6-makersbnb/Makersbnb--Lucky-Apocalypse/spec/backend/feature/create_listing_spec.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/student/Documents/Projects/week6-makersbnb/Makersbnb--Lucky-Apocalypse/spec/backend/feature/infastructure_spec.rb": [
         1,
         1,
         1,
@@ -35,6 +87,6 @@
         null
       ]
     },
-    "timestamp": 1580128794
+    "timestamp": 1580138284
   }
 }

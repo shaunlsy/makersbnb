@@ -7,6 +7,7 @@ require 'sinatra'
 require 'pg'
 
 # Models
+require 'database_connection'
 
 
 class MakersbnbApp < Sinatra::Base
@@ -19,6 +20,10 @@ class MakersbnbApp < Sinatra::Base
 
   get '/' do
     erb :homepage
+  end
+
+  get '/create-listing' do
+    erb :create_listing
   end
 
   # start the server if ruby file executed directly
