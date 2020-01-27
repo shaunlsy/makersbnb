@@ -13,7 +13,7 @@
 
 <body>
   <header>
-  Makersbnb
+  <h1>Makersbnb</h1>
   </header>
 
   <section id='listing-button'>
@@ -25,6 +25,12 @@
   </section>
 
   <section id='display-listings'>
+  <% @list_of_listings.each do |listing| %>
+  <div class= 'listing'>
+  <%= listing.list_name %> by <%= listing.username%>
+  <% end %>
+  </div>
+
 
   </section>
 

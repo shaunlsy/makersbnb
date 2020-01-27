@@ -21,6 +21,7 @@ class MakersbnbApp < Sinatra::Base
   Listing.setup(DatabaseConnection)
 
   get '/' do
+    @list_of_listings = Listing.all
     erb :homepage
   end
 
