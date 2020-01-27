@@ -1,1 +1,4 @@
-Users' house
+<ul><%@listing.all.each do |listing|%>
+<li><%=listing.list_name%></li>
+<%end%>
+</ul>

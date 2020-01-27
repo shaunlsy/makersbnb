@@ -25,11 +25,14 @@ class MakersbnbApp < Sinatra::Base
   end
 
   get '/create-listing' do
+    @dbconnection = DatabaseConnection
     erb :create_listing
   end
 
   post '/listings' do
-    erb :listings
+    p params
+    Listing.create(list_name: params[:list_name], user_id: params[:user_id])
+    redirect '/'
   end
 
   # start the server if ruby file executed directly

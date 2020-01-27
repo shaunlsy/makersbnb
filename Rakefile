@@ -46,7 +46,13 @@ task :development_tables => [:database] do
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id));"]
 end
 
-task :test_tables => [:development_tables] do
+task :seed_development_tables => [:development_tables] do
+  puts 'Adding to development database...'
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO users(username) VALUES('test-username');"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO listings(list_name, user_id_fk) VALUES('The makers loft', '1');"]
+end
+
+task :test_tables => [:seed_development_tables] do
   puts 'Creating test tables...'
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id));"]

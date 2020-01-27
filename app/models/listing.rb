@@ -20,6 +20,6 @@ class Listing
   end
 
   def self.create(list_name:, user_id:)
-    @dbconnection.command("INSERT INTO listings(list_name) VALUES('#{list_name}')")
+    @dbconnection.command("INSERT INTO listings(list_name, user_id_fk) VALUES('#{list_name}', '#{user_id}')")
   end
 end
