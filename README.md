@@ -25,6 +25,8 @@ Vish Mayer
 
 The webapp has been developed on Sinatra, a rack based platform, so to install clone this repo, make sure Homebrew and Ruby 2.6.5 is installed then:
 - move to the project root directory in terminal
+- run ``` gem install bundle ```
+- run ``` bundle ```
 - run ``` gem install rake ```
 - run ``` rake ```
 - run ```rackup``` to start server on localhost port 9292

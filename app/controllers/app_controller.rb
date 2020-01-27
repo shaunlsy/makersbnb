@@ -4,6 +4,7 @@ $LOAD_PATH << './app/models'
 
 # Gems
 require 'sinatra'
+require 'pg'
 
 # Models
 
@@ -13,6 +14,8 @@ class MakersbnbApp < Sinatra::Base
   set :root, File.join(File.dirname(__FILE__), '..')
   set :views, Proc.new { File.join(root, "views") }
   set :public_folder, Proc.new { File.join(root, "../public") }
+
+  DatabaseConnection.add_details(dbname: 'makersbnb', user: ENV['USER'], dbms: PG)
 
   get '/' do
     erb :homepage
