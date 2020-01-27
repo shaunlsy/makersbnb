@@ -26,6 +26,10 @@ class MakersbnbApp < Sinatra::Base
     erb :create_listing
   end
 
+  post '/listings' do
+    erb :listings
+  end
+  
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end
