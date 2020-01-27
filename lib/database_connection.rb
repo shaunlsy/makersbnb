@@ -21,12 +21,6 @@ class DatabaseConnection
   private
 
   def self.database_type(dbname)
-    if ENV['ENVIRONMENT'] == 'test'
-      dbname + '-test'
-    elsif ENV['ENVIRONMENT'] == 'development'
-      dbname + '-development'
-    else
-      dbname + '-production'
-    end
+    ENV['ENVIRONMENT'] == 'test' ? dbname + '-test' : dbname + '-development'
   end
 end

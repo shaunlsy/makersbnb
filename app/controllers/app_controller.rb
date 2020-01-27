@@ -7,6 +7,7 @@ require 'sinatra'
 require 'pg'
 
 # Models
+require 'database_connection'
 
 
 class MakersbnbApp < Sinatra::Base
