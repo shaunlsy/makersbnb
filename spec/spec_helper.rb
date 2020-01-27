@@ -28,7 +28,7 @@ RSpec.configure do |config|
     user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
     user_id = user_id[0]['user_id']
     # add test messages
-    con.exec("INSERT INTO listings(list_name, user_id_fk) VALUES('Test lisitng 1', '#{user_id}') ;")
+    con.exec("INSERT INTO listings(list_name, user_id_fk) VALUES('Test listing 1', '#{user_id}') ;")
     # add test comments
   end
   config.after(:each) do
