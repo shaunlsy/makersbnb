@@ -14,7 +14,9 @@
 <body>
   <header>
   <h1>Makersbnb</h1>
-  <h2>Welcome <%=@username%></h2>
+  <% if @user.logged_in %>
+    <h2> Welcome <%=@user.username%> </h2>
+  <% end %>
   </header>
 
   <section id='listing-button'>
@@ -25,29 +27,27 @@
   </form>
   </section>
 
-  <section id='sign-up'>
-    <form action="/sign-up" method="post">
-    Username: 
-    <input type="text" name="username" placeholder="username" required>
-    Email:
-    <input type="text" name="email" placeholder="E-mail" required>
-    Password:
-    <input type="password" id="pass" name="Password"
-           minlength="8" required>
-  <input type="submit" value= 'Sign up' placeholder= 'Sign up'>
-    </form>
+  <% unless @user.logged_in %>
+    <section id='sign-up'>
+      <form action="/sign-up" method="post">
+        Username: <input type="text" name="username" placeholder="username" required>
+        Email: <input type="text" name="email" placeholder="E-mail" required>
+        Password: <input type="password" id="pass" name="Password" minlength="8" required>
+        <input type="submit" value= 'Sign up' placeholder= 'Sign up'>
+      </form>
+    </section>
+  <% end %>
 
-  </section>
 
   <section id='display-listings'>
   <% @list_of_listings.each do |listing| %>
     <div class= 'listing'>
     <%= listing.list_name %> by <%= listing.username%><br>
     Description: <%= listing.short_description%><br>
-    Price per night: £<%= listing.price_per_night%> 
+    Price per night: £<%= listing.price_per_night%>
     </div>
   <% end %>
-  
+
 
 
   </section>

@@ -7,12 +7,15 @@ describe User do
   end
 
   describe ".create" do
-    let(:dbconnection) {double :dbconnection, :command => nil}
+    let(:dbconnection) {double :dbconnection, :command => [{"user_id" => '1'}]}
     it "creates a new user in the table" do
       User.setup(dbconnection)
       allow(BCrypt::Password).to receive(:create).and_return("encrypted password")
-      expect(dbconnection).to receive(:command).with("INSERT INTO users(username, email, password) VALUES('test_username', 'test@test.com', 'encrypted password');")
+      expect(dbconnection).to receive(:command).with("INSERT INTO users(username, email, password) VALUES('test_username', 'test@test.com', 'encrypted password') RETURNING user_id;")
       User.create('test_username','test@test.com', 'password')
+    end
+    it "returns a user ID" do
+      expect(User.create('test_username','test@test.com', 'password')).to be_a_kind_of(String)
     end
   end
 
@@ -29,6 +32,22 @@ describe User do
     it 'returns nil if email is incorrect' do
       User.create('test_username','test@test.com', 'password')
       expect(User.authenticate('test@test.com', 'wrong password')).to eq(nil)
+    end
+  end
+
+  describe '.find' do
+    it 'finds user by id and returns user instance' do
+      user_id = User.create('test_username','test@test.com', 'password')
+      user = User.find(user_id)
+      expect(user).to be_a_kind_of(User)
+      expect(user.email).to eq('test@test.com')
+      expect(user.username).to eq('test_username')
+      expect(user.logged_in).to be(true)
+    end
+    it 'returns logged out user instance if no id provided' do
+      user = User.find(nil)
+      expect(user).to be_a_kind_of(User)
+      expect(user.logged_in).to be(false)
     end
   end
 

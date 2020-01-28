@@ -27,7 +27,7 @@ class MakersbnbApp < Sinatra::Base
 
   get '/' do
     @list_of_listings = Listing.all
-    @username = session[:username]
+    @user = User.find(session[:user_id])
     erb :homepage
   end
 
@@ -42,10 +42,7 @@ class MakersbnbApp < Sinatra::Base
   end
 
   post '/sign-up' do
-    session[:username] = params[:username]
-    session[:email] = params[:email]
-    session[:password] = params[:password]
-    User.create(session[:username], session[:email], session[:password])
+    session[:user_id] = User.create(params['username'], params['email'], params['password'])
     redirect '/'
   end
 
