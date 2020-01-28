@@ -1,4 +1,4 @@
-require 'bcrypt'
+require 'digest'
 
 class User
 
@@ -15,20 +15,24 @@ class User
   end
 
   def self.create(username, email, password)
-    encrypted_password = BCrypt::Password.create(password)
+    p password
+    encrypted_password = Digest::SHA256.hexdigest(password)
+    p encrypted_password
     @dbconnection.command("INSERT INTO users(username, email, password) VALUES('#{username}', '#{email}', '#{encrypted_password}') RETURNING user_id;")[0]['user_id']
   end
 
   def self.authenticate(email, password)
+    p password
     begin
       database_password = @dbconnection.command("SELECT password FROM users WHERE email='#{email}';")[0]['password']
     rescue
       return nil
     end
-    if BCrypt::Password.new(database_password) == password
+    if database_password == Digest::SHA256.hexdigest(password)
       user_id = @dbconnection.command("SELECT user_id FROM users WHERE email='#{email}';")[0]['user_id']
       return user_id
     else
+      p 'password fail'
       return nil
     end
   end
