@@ -2,11 +2,11 @@
 window.addEventListener("load", function() {
     $(document).ready(function() {
         $(".log-in-button").click(function() {
-            $("#log-in").slideDown();
+            $("#log-in").slideToggle();
         })
 
         $(".sign-up-button").click(function() {
-            $("#sign-up").slideDown();
+            $("#sign-up").slideToggle();
         })
 
     })
