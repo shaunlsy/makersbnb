@@ -89,13 +89,17 @@ I want to be notified and confirm when a user requests to let my space
 
 ```
 As a user
-So I can use the site
+So I can use the site and manage bookings
 I want to be able to sign up
 ```
 ```
 As a user
 So that I can access my account
 I want to be able to login
+```
+```
+As a client
+So that unregistered users can't book I want to hide booking buttons until user has logged in
 ```
 
 
