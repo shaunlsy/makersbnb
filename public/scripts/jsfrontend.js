@@ -9,5 +9,13 @@ window.addEventListener("load", function() {
             $("#sign-up").slideToggle();
         })
 
+        $(".listing").click(function() {
+            var id = $(this).attr('id')
+            $.get(`listing/${id}`, function(data) {
+              $(`#extra${id}`).html(data)
+            })
+        })
+
+
     })
 })

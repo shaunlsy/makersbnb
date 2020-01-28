@@ -37,6 +37,11 @@ class MakersbnbApp < Sinatra::Base
     erb :create_listing
   end
 
+  get '/listing/:id' do
+    @listing = params['id']
+    erb :listing
+  end
+
   post '/listings' do
     Listing.create(list_name: params[:list_name], user_id: params[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
     redirect '/'
@@ -51,14 +56,14 @@ class MakersbnbApp < Sinatra::Base
     session[:user_id] = User.authenticate(params[:log_in_email], params[:log_in_password])
     if session[:user_id] == nil
       string = "username or password incorrect, please try again"
-    else 
+    else
       string = "Log in successful"
     end
     redirect "/?login=#{string}"
   end
 
   post '/log-out' do
-    session[:user_id] = nil 
+    session[:user_id] = nil
     redirect '/'
   end
 
