@@ -10,7 +10,7 @@ describe User do
     let(:dbconnection) {double :dbconnection, :command => [{"user_id" => '1'}]}
     it "creates a new user in the table" do
       User.setup(dbconnection)
-      allow(BCrypt::Password).to receive(:create).and_return("encrypted password")
+      allow(Digest::SHA256).to receive(:hexdigest).and_return("encrypted password")
       expect(dbconnection).to receive(:command).with("INSERT INTO users(username, email, password) VALUES('test_username', 'test@test.com', 'encrypted password') RETURNING user_id;")
       User.create('test_username','test@test.com', 'password')
     end
