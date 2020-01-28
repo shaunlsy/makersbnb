@@ -26,10 +26,11 @@
 
   <section id='display-listings'>
   <% @list_of_listings.each do |listing| %>
-  <div class= 'listing'>
-  <%= listing.list_name %> by <%= listing.username%>
+    <div class= 'listing'>
+    <%= listing.list_name %> by <%= listing.username%>
+    </div>
   <% end %>
-  </div>
+  
 
 
   </section>

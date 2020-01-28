@@ -14,7 +14,7 @@ class Listing
   end
 
   def self.all
-    listings = @dbconnection.command('SELECT list_name, listing_id, user_id, username FROM listings JOIN users ON (users.user_id=listings.listing_id)')
+    listings = @dbconnection.command('SELECT list_name, listing_id, user_id, username FROM listings JOIN users ON (users.user_id=listings.user_id_fk)')
 
     listings.map{ |listing| self.new(listing['list_name'], listing['listing_id'], listing['user_id'], listing['username'])}
   end
