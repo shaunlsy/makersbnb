@@ -12,76 +12,91 @@
 </head>
 
 <body>
-  <header>
-  <h1>Makersbnb</h1>
-  <% if @user.logged_in %>
-   <h2> Welcome <%=@user.username%> </h2>
-    <section id="log-out">
-      <form action='/log-out' method="post">
-      <input class="btn" type="submit" value='Log out' placeholder="Log out">
-      </form>
-    </section>
-  <%end%>
+  <header class='header'>
 
-    <% unless @user.logged_in %>
-      <span id='log-in-buttons'>
-      <button class="log-in-button">Log in</button>
-      <section id="log-in">
-        <%= @log_in_action %>
-        <form action='/log-in' method="post">
-          Email: <input type="text" name="log_in_email" placeholder="Email" required>
-          Password: <input type="password" name="log_in_password" minlength="8" required>
-          <input class="btn" type="submit" value='log in'>
-        </form>
-      </section>
-      </span>
-      <span>
-      <button class="sign-up-button">Register</button>
-        <section id='sign-up'>
+    <div class='title'>
+      <div id='main-title'><strong>Makersbnb</strong></div>
+
+      <% if @user.logged_in %>
+        <div id='user-logged-in'> Welcome <%=@user.username%>
+        </div>
+        <div id='listing-button'>
+          <form action="/create-listing" method="get">
+            <button class="btn" id="create-listing">Create a new listing!</button>
+          </form>
+        </div>
+      <%end%>
+    </div>
+
+
+    <div class='user-buttons'>
+
+      <% unless @user.logged_in %>
+
+        <div class='log-in-buttons'>
+          <button class="log-in-button">Log in</button>
+          <button class="sign-up-button">Register</button>
+        </div>
+
+        <div class='log-in-forms' id="log-in">
+          <%= @log_in_action %>
+          <form action='/log-in' method="post">
+            Email: <input type="text" name="log_in_email" placeholder="Email" required>
+            Password: <input type="password" name="log_in_password" minlength="8" required>
+            <input class="btn" type="submit" value='log in'>
+          </form>
+        </div>
+
+        <div class='log-in-forms' id='sign-up'>
           <form action="/sign-up" method="post">
             Username: <input type="text" name="username" placeholder="username" required>
             Email: <input type="text" name="email" placeholder="E-mail" required>
             Password: <input type="password" name="password" minlength="8" required>
             <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
           </form>
-        </section>
-      </span>
-    <% end %>
+        </div>
+      <% end %>
 
+      <% if @user.logged_in %>
+        <div class='log-in-buttons'>
+          <form action='/log-out' method="post">
+          <input class="btn" type="submit" value='Log out' placeholder="Log out">
+          </form>
+        </div>
+      <% end %>
+
+    </div>
 
   </header>
 
-<% if @user.logged_in %>
-  <section id='listing-button'>
-  <form action="/create-listing" method="get">
-    <div id="create-listing-header">
-    <button class="btn" id="create-listing">Create a new listing!</button>
-  </div>
-  </form>
-  </section>
-  <% end %>
 
 
-  <section id='display-listings'>
+
+  <div class='display-listings'>
   <% @list_of_listings.each_with_index do |listing, i| %>
     <div class='listing' id='<%=listing.list_id%>'>
-      <span id="image">
-        <img src="media/cool_house<%=i%>.jpg" height= 200px>
-      </span>
-      <span id="description">
-          <%= listing.list_name %> by <%= listing.username%><br>
-          Description: <%= listing.short_description%><br>
-          Price per night: £<%= listing.price_per_night%>
-      </span>
-      <div id='extra<%=listing.list_id%>'>
 
+      <div class='listing-outline'>
+        <div class="image">
+          <img src="media/cool_house<%=i%>.jpg" height= 200px>
+        </div>
+        <div class="overview">
+            <%= listing.list_name %> by <%= listing.username%><br>
+            Description: <%= listing.short_description%><br>
+            Price per night: £<%= listing.price_per_night%>
+        </div>
       </div>
+
+      <div class='extra' id='extra<%=listing.list_id%>' data-requested="false">
+        <!-- extra information on click -->
+      </div>
+
     </div>
   <% end %>
-  </section>
+  </div>
 
 
-  <footer>
+  <footer class='footer'>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
   </footer>
   <script src="scripts/jsfrontend.js"></script>
