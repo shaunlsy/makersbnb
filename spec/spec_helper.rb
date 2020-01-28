@@ -15,6 +15,7 @@ require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rspec'
 require 'app_controller'
+require 'web_helpers'
 
 Capybara.app = MakersbnbApp
 

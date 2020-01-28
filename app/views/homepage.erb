@@ -35,7 +35,7 @@
         </form>
       </section>
       </span>
-      <span> 
+      <span>
       <button class="sign-up-button">Register</button>
         <section id='sign-up'>
           <form action="/sign-up" method="post">
@@ -46,9 +46,9 @@
           </form>
         </section>
       </span>
-    <% end %> 
+    <% end %>
 
-            
+
   </header>
 
 <% if @user.logged_in %>
@@ -75,12 +75,7 @@
       </span>
       <div id='extra<%=listing.list_id%>'>
 
-    </div>
-
-    <%= listing.list_name %> by <%= listing.username%><br>
-    Description: <%= listing.short_description%><br>
-    Price per night: £<%= listing.price_per_night%>
-    <div id='extra<%=listing.list_id%>'></div>
+      </div>
     </div>
   <% end %>
   </section>

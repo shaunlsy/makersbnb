@@ -4,7 +4,7 @@ feature "logging in" do
     visit('/')
     fill_in "log_in_email", with: 'user_test@test.com'
     fill_in "log_in_password", with: 'password'
-    click_button "log_in"
+    click_button "log in"
     expect(page).to have_content "test"
     end
 end
