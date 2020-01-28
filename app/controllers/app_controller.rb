@@ -32,7 +32,7 @@ class MakersbnbApp < Sinatra::Base
 
   post '/listings' do
     p params
-    Listing.create(list_name: params[:list_name], user_id: params[:user_id])
+    Listing.create(list_name: params[:list_name], user_id: params[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
     redirect '/'
   end
 

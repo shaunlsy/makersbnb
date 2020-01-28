@@ -27,7 +27,9 @@
   <section id='display-listings'>
   <% @list_of_listings.each do |listing| %>
     <div class= 'listing'>
-    <%= listing.list_name %> by <%= listing.username%>
+    <%= listing.list_name %> by <%= listing.username%><br>
+    Description: <%= listing.short_description%><br>
+    Price per night: £<%= listing.price_per_night%> 
     </div>
   <% end %>
   
