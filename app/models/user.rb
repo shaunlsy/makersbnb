@@ -15,9 +15,7 @@ class User
   end
 
   def self.create(username, email, password)
-    p password
     encrypted_password = Digest::SHA256.hexdigest(password)
-    p encrypted_password
     @dbconnection.command("INSERT INTO users(username, email, password) VALUES('#{username}', '#{email}', '#{encrypted_password}') RETURNING user_id;")[0]['user_id']
   end
 

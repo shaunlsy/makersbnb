@@ -16,7 +16,14 @@
   <h1>Makersbnb</h1>
   <% if @user.logged_in %>
     <h2> Welcome <%=@user.username%> </h2>
-  <% end %>
+
+    <section id="log-out">
+      <form action='/log-out' method="post">
+      <input type="submit" value='Log out' placeholder="Log out">
+      </form>
+    </section>
+  <%end%>
+  
     <% unless @user.logged_in %>
       <span id='log-in-buttons'>
       <button class="log-in-button">Log in</button>  
@@ -41,6 +48,7 @@
         </section>
       </span>
     <% end %>    
+
   </header>
 
   <section id='listing-button'>
@@ -52,8 +60,6 @@
   </section>
 
   
-
-
   <section id='display-listings'>
   <% @list_of_listings.each do |listing| %>
     <div class= 'listing'>
@@ -63,6 +69,7 @@
     </div>
   <% end %>
   </section>
+
 
   <footer>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
