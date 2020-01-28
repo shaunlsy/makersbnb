@@ -43,21 +43,23 @@ class MakersbnbApp < Sinatra::Base
   end
 
   post '/sign-up' do
-    p params
     session[:user_id] = User.create(params['username'], params['email'], params['password'])
     redirect '/'
   end
 
   post '/log-in' do
-    p params
     session[:user_id] = User.authenticate(params[:log_in_email], params[:log_in_password])
-    p session[:user_id]
     if session[:user_id] == nil
       string = "username or password incorrect, please try again"
     else 
       string = "Log in successful"
     end
     redirect "/?login=#{string}"
+  end
+
+  post '/log-out' do
+    session[:user_id] = nil 
+    redirect '/'
   end
 
   # start the server if ruby file executed directly

@@ -59,6 +59,14 @@
     </form>
   </section>
 
+  <section id="log-out">
+  <% if @user.logged_in %>
+    <form action='/log-out' method="post">
+    <input type="submit" value='Log out' placeholder="Log out">
+    </form>
+  <%end%>
+  </section>
+
   <footer>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
   </footer>
