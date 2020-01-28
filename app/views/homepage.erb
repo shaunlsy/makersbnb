@@ -15,11 +15,10 @@
   <header>
   <h1>Makersbnb</h1>
   <% if @user.logged_in %>
-    <h2> Welcome <%=@user.username%> </h2>
-
+   <h2> Welcome <%=@user.username%> </h2>
     <section id="log-out">
       <form action='/log-out' method="post">
-      <input type="submit" value='Log out' placeholder="Log out">
+      <input class="btn" type="submit" value='Log out' placeholder="Log out">
       </form>
     </section>
   <%end%>
@@ -32,37 +31,52 @@
         <form action='/log-in' method="post">
           Email: <input type="text" name="log_in_email" placeholder="Email" required>
           Password: <input type="password" name="log_in_password" minlength="8" required>
-          <input type="submit" value='log_in'>
+          <input class="btn" type="submit" value='log in'>
         </form>
       </section>
       </span>
-      <span>
-      <button class="sign-up-button">Show Sign up</button>
+      <span> 
+      <button class="sign-up-button">Register</button>
         <section id='sign-up'>
           <form action="/sign-up" method="post">
             Username: <input type="text" name="username" placeholder="username" required>
             Email: <input type="text" name="email" placeholder="E-mail" required>
             Password: <input type="password" name="password" minlength="8" required>
-            <input type="submit" value='Sign up' placeholder='Sign up'>
+            <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
           </form>
         </section>
       </span>
-    <% end %>
+    <% end %> 
 
+            
   </header>
 
+<% if @user.logged_in %>
   <section id='listing-button'>
   <form action="/create-listing" method="get">
-    <div id="create-listing-header">Create listing:
-    <button id="create-listing">Create a new listing!</button>
+    <div id="create-listing-header">
+    <button class="btn" id="create-listing">Create a new listing!</button>
   </div>
   </form>
   </section>
+  <% end %>
 
 
   <section id='display-listings'>
-  <% @list_of_listings.each do |listing| %>
+  <% @list_of_listings.each_with_index do |listing, i| %>
     <div class='listing' id='<%=listing.list_id%>'>
+      <span id="image">
+        <img src="media/cool_house<%=i%>.jpg" height= 200px>
+      </span>
+      <span id="description">
+          <%= listing.list_name %> by <%= listing.username%><br>
+          Description: <%= listing.short_description%><br>
+          Price per night: £<%= listing.price_per_night%>
+      </span>
+      <div id='extra<%=listing.list_id%>'>
+
+    </div>
+
     <%= listing.list_name %> by <%= listing.username%><br>
     Description: <%= listing.short_description%><br>
     Price per night: £<%= listing.price_per_night%>
