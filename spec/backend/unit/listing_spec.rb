@@ -14,7 +14,6 @@ describe Listing do
     it 'adds a listing to the database' do
       user_id = DatabaseConnection.command("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")[0]['user_id']
       subject.create(list_name: 'Users House', user_id: user_id, short_description: "Welcome", price_per_night: "100")
-      p subject.all
       expect(subject.all[-1].list_name).to eq 'Users House'
       expect(subject.all[-1].short_description ).to eq 'Welcome'
       expect(subject.all[-1].price_per_night).to eq '100'
