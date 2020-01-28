@@ -5,10 +5,12 @@ $LOAD_PATH << './app/models'
 # Gems
 require 'sinatra'
 require 'pg'
+require 'bcrypt'
 
 # Models
 require 'database_connection'
 require 'listing'
+require 'user'
 
 
 class MakersbnbApp < Sinatra::Base
@@ -19,6 +21,7 @@ class MakersbnbApp < Sinatra::Base
 
   DatabaseConnection.add_details(dbname: 'makersbnb', user: ENV['USER'], dbms: PG)
   Listing.setup(DatabaseConnection)
+  User.setup(DatabaseConnection)
 
   get '/' do
     @list_of_listings = Listing.all
@@ -31,7 +34,6 @@ class MakersbnbApp < Sinatra::Base
   end
 
   post '/listings' do
-    p params
     Listing.create(list_name: params[:list_name], user_id: params[:user_id])
     redirect '/'
   end
