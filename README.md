@@ -101,6 +101,11 @@ I want to be able to login
 As a client
 So that unregistered users can't book I want to hide booking buttons until user has logged in
 ```
+```
+As a user
+So that I know that I'm logged in
+I want to see my username in the header
+```
 
 
 #### **Desirable Requirements**
