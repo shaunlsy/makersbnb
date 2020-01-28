@@ -22,10 +22,10 @@
       </form>
     </section>
   <%end%>
-  
+
     <% unless @user.logged_in %>
       <span id='log-in-buttons'>
-      <button class="log-in-button">Log in</button>  
+      <button class="log-in-button">Log in</button>
       <section id="log-in">
         <%= @log_in_action %>
         <form action='/log-in' method="post">
@@ -46,8 +46,9 @@
           </form>
         </section>
       </span>
-     
     <% end %> 
+
+            
   </header>
 
 <% if @user.logged_in %>
@@ -60,16 +61,26 @@
   </section>
   <% end %>
 
-  
+
   <section id='display-listings'>
   <% @list_of_listings.each_with_index do |listing, i| %>
-    <div class='listing'>
-    <span id="image"><img src="media/cool_house<%=i%>.jpg" height= 200px></span>
-      <span id="description">
-        <%= listing.list_name %> by <%= listing.username%><br>
-        Description: <%= listing.short_description%><br>
-        Price per night: £<%= listing.price_per_night%>
+    <div class='listing' id='<%=listing.list_id%>'>
+      <span id="image">
+        <img src="media/cool_house<%=i%>.jpg" height= 200px>
       </span>
+      <span id="description">
+          <%= listing.list_name %> by <%= listing.username%><br>
+          Description: <%= listing.short_description%><br>
+          Price per night: £<%= listing.price_per_night%>
+      </span>
+      <div id='extra<%=listing.list_id%>'>
+
+    </div>
+
+    <%= listing.list_name %> by <%= listing.username%><br>
+    Description: <%= listing.short_description%><br>
+    Price per night: £<%= listing.price_per_night%>
+    <div id='extra<%=listing.list_id%>'></div>
     </div>
   <% end %>
   </section>
