@@ -23,8 +23,11 @@ class MakersbnbApp < Sinatra::Base
   Listing.setup(DatabaseConnection)
   User.setup(DatabaseConnection)
 
+  enable :sessions
+
   get '/' do
     @list_of_listings = Listing.all
+    @username = session[:username]
     erb :homepage
   end
 
@@ -35,6 +38,14 @@ class MakersbnbApp < Sinatra::Base
 
   post '/listings' do
     Listing.create(list_name: params[:list_name], user_id: params[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
+    redirect '/'
+  end
+
+  post '/sign-up' do
+    session[:username] = params[:username]
+    session[:email] = params[:email]
+    session[:password] = params[:password]
+    User.create(session[:username], session[:email], session[:password])
     redirect '/'
   end
 

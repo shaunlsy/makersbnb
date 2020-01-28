@@ -14,6 +14,7 @@
 <body>
   <header>
   <h1>Makersbnb</h1>
+  <h2>Welcome <%=@username%></h2>
   </header>
 
   <section id='listing-button'>
@@ -22,6 +23,20 @@
     <button id="create-listing">Create a new listing!</button>
   </div>
   </form>
+  </section>
+
+  <section id='sign-up'>
+    <form action="/sign-up" method="post">
+    Username: 
+    <input type="text" name="username" placeholder="username" required>
+    Email:
+    <input type="text" name="email" placeholder="E-mail" required>
+    Password:
+    <input type="password" id="pass" name="Password"
+           minlength="8" required>
+  <input type="submit" value= 'Sign up' placeholder= 'Sign up'>
+    </form>
+
   </section>
 
   <section id='display-listings'>
