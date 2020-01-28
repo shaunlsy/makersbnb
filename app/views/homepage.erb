@@ -17,6 +17,30 @@
   <% if @user.logged_in %>
     <h2> Welcome <%=@user.username%> </h2>
   <% end %>
+    <% unless @user.logged_in %>
+      <span id='log-in-buttons'>
+      <button class="log-in-button">Log in</button>  
+      <section id="log-in">
+        <%= @log_in_action %>
+        <form action='/log-in' method="post">
+          Email: <input type="text" name="log_in_email" placeholder="Email" required>
+          Password: <input type="password" name="log_in_password" minlength="8" required>
+          <input type="submit" value='log_in'>
+        </form>
+      </section>
+      </span>
+      <span> 
+      <button class="sign-up-button">Show Sign up</button>
+        <section id='sign-up'>
+          <form action="/sign-up" method="post">
+            Username: <input type="text" name="username" placeholder="username" required>
+            Email: <input type="text" name="email" placeholder="E-mail" required>
+            Password: <input type="password" name="password" minlength="8" required>
+            <input type="submit" value='Sign up' placeholder='Sign up'>
+          </form>
+        </section>
+      </span>
+    <% end %>    
   </header>
 
   <section id='listing-button'>
@@ -27,16 +51,7 @@
   </form>
   </section>
 
-  <% unless @user.logged_in %>
-    <section id='sign-up'>
-      <form action="/sign-up" method="post">
-        Username: <input type="text" name="username" placeholder="username" required>
-        Email: <input type="text" name="email" placeholder="E-mail" required>
-        Password: <input type="password" name="password" minlength="8" required>
-        <input type="submit" value= 'Sign up' placeholder= 'Sign up'>
-      </form>
-    </section>
-  <% end %>
+  
 
 
   <section id='display-listings'>
@@ -49,17 +64,8 @@
   <% end %>
   </section>
 
-  <section id="log-in">
-    <%= @log_in_action %>
-
-    <form action='/log-in' method="post">
-      Email: <input type="text" name="log_in_email" placeholder="Email" required>
-      Password: <input type="password" name="log_in_password" minlength="8" required>
-      <input type="submit" value='log_in'>
-    </form>
-  </section>
-
   <footer>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
   </footer>
+  <script src="scripts/jsfrontend.js"></script>
 </body>
