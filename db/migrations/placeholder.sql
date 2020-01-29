@@ -1,4 +1,10 @@
-CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, email VARCHAR, password VARCHAR);
+CREATE TABLE users
+(
+  user_id SERIAL PRIMARY KEY,
+  username VARCHAR,
+  email VARCHAR,
+  password VARCHAR
+);
 
 CREATE TABLE listings
 (
@@ -7,4 +13,14 @@ CREATE TABLE listings
   user_id_fk INTEGER REFERENCES users(user_id),
   short_description VARCHAR,
   price_per_night INTEGER
+);
+
+CREATE TABLE bookings
+(
+  booking_id SERIAL PRIMARY KEY,
+  listing_id_fk INTEGER REFERENCES listings(listing_id),
+  user_id_fk INTEGER REFERENCES users(user_id),
+  start_date DATE,
+  end_date DATE,
+  confirmation BOOLEAN
 );
