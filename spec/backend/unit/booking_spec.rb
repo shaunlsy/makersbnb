@@ -12,4 +12,8 @@ describe Booking do
   # describe '.create' do
   #   it 'adds a booking request into the database' do
   #     user_id = DatabaseConnection.command("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")[0]['user_id']
+
+ 
 end
+
+
