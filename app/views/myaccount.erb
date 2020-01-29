@@ -19,9 +19,10 @@
         <div id='main-title'><strong>Makersbnb</strong></div>
 
         <% if @user.logged_in %>
-          <div id='user-logged-in'>My Account</div>
+          <div id='myaccount'>
+            My Account
+          </div>
         <% end %>
-
       </div>
 
       <% if @user.logged_in %>
@@ -40,35 +41,64 @@
 
   <% if @user.logged_in %>
 
-    <section class='mylistings'>
-      <h2> My Listings </h2>
+    <section class='listing-container'>
+      <nav class='listing-navigation'>
+        <div>
+          <button class='navbtn' id='mylistingsbtn'>My Listings</button>
+          <button class='navbtn' id='mybookingsbtn'>My Bookings</button>
+          <button class='navbtn' id='mytripsbtn'>My Trips</button>
+        </div>
+      </nav>
 
-      <div class='display-listings'>
-        <% @mylistings.each_with_index do |listing, i| %>
+      <div class='mylistings' id='listings'>
+        <h2> My Listings </h2>
 
-          <div class='listing'>
-            <div class='listing-full' id='<%=listing.list_id%>'>
-              <div class="image">
-                <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
-              </div>
-              <div class="overview">
-                  <%= listing.list_name %> by <%= listing.username%><br>
-                  Description: <%= listing.short_description%>
-                  Price per night: £<%= listing.price_per_night%>
+        <div class='display-listings'>
+          <% @mylistings.each_with_index do |listing, i| %>
+
+            <div class='listing'>
+              <div class='listing-full' id='<%=listing.list_id%>'>
+                <div class="image">
+                  <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                </div>
+                <div class="overview">
+                    <%= listing.list_name %> by <%= listing.username%><br>
+                    Description: <%= listing.short_description%>
+                    Price per night: £<%= listing.price_per_night%>
+                </div>
               </div>
             </div>
-          </div>
 
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </section>
+
+      <div class='mylistings' id='bookings'>
+        <h2> My Bookings </h2>
+
+        <div class='display-listings'>
+          test bookings
+        </div>
+      </div>
+
+      <div class='mylistings' id='trips'>
+        <h2> My Trips </h2>
+
+        <div class='display-listings'>
+        test trips
+        </div>
+      </div>
+
+  </section>
 
   <% else %>
     User not logged in
   <% end %>
 
   <footer class='footer'>
+    <br>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
+    <br>
   </footer>
 
   <script src="scripts/jsfrontend.js"></script>
