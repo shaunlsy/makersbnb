@@ -28,4 +28,15 @@ class Listing
   def self.listing_query(id)
     @dbconnection.command("SELECT listing_id, list_name, short_description, price_per_night FROM listings WHERE listing_id='#{id}';")[0]
   end
+
+  def self.my_listings(id)
+    begin
+      listings = @dbconnection.command("SELECT list_name, listing_id, user_id, username, short_description, price_per_night FROM listings JOIN users ON (users.user_id=listings.user_id_fk) WHERE listings.user_id_fk='#{id}'")
+    rescue
+      return []
+    end
+
+    listings.map{ |listing| self.new(listing['list_name'], listing['listing_id'], listing['user_id'], listing['username'], listing['short_description'], listing['price_per_night'])}
+
+  end
 end

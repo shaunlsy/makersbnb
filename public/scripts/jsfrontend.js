@@ -26,5 +26,9 @@ window.addEventListener("load", function() {
       $('.add-listing').fadeToggle()
     })
 
+    $("#myaccount").click(function() {
+      window.location.href = "/myaccount"
+    })
+
   })
 })

@@ -62,6 +62,12 @@ class MakersbnbApp < Sinatra::Base
     redirect '/'
   end
 
+  get '/myaccount' do
+    @user = User.find(session[:user_id])
+    @mylistings = Listing.my_listings(session[:user_id])
+    erb :myaccount
+  end
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end
