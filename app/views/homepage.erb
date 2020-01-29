@@ -26,7 +26,13 @@
           <!-- </form> -->
         </div>
         <div class='add-listing'>
-          <!-- add lisitng form -->
+          <h1> Insert Your Listing </h1>
+          <form action='/listings' method="post">
+            Listing name: <input type="text" name="list_name"><br>
+            Description: <input type="text" name="short_description"><br>
+            Price per night: <input type="text" name="price_per_night">
+            <input type='submit' value='Add listing'>
+          </form>
         </div>
       <%end%>
     </div>
@@ -37,7 +43,7 @@
       <% unless @user.logged_in %>
 
         <div class='log-in-buttons'>
-          <button class="log-in-button">Log in</button>
+          <button id='newbutton' class="log-in-button">Log in</button>
           <button class="sign-up-button">Register</button>
         </div>
 
@@ -73,25 +79,31 @@
   </header>
 
 
-
-
   <div class='display-listings'>
   <% @list_of_listings.each_with_index do |listing, i| %>
-    <div class='listing' id='<%=listing.list_id%>'>
+    <div class='listing'>
 
-      <div class='listing-outline'>
+      <div class='listing-outline' id='<%=listing.list_id%>'>
         <div class="image">
           <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
         </div>
         <div class="overview">
             <%= listing.list_name %> by <%= listing.username%><br>
-            Description: <%= listing.short_description%><br>
             Price per night: £<%= listing.price_per_night%>
         </div>
       </div>
 
-      <div class='extra' id='extra<%=listing.list_id%>' data-requested="false">
-        <!-- extra information on click -->
+      <div class='extra' id='extra<%=listing.list_id%>'>
+        <div class='flex-container'>
+          <div>
+            <div><strong>Title: </strong><span class='extra-title'></span></div>
+            <div><strong>Description: </strong><span class='extra-description'></span></div>
+            <div><strong>Price: </strong><span class='extra-price'></span></div>
+          </div>
+          <div class='#extra-button'>
+          <button class='btn' id='book-space'>Book Space!</button>
+          </div>
+        </div>
       </div>
 
     </div>

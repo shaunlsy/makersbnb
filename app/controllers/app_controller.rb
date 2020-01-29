@@ -5,12 +5,13 @@ $LOAD_PATH << './app/models'
 # Gems
 require 'sinatra'
 require 'pg'
-require 'bcrypt'
+require 'json'
 
 # Models
 require 'database_connection'
 require 'listing'
 require 'user'
+
 
 
 class MakersbnbApp < Sinatra::Base
@@ -32,17 +33,12 @@ class MakersbnbApp < Sinatra::Base
     erb :homepage
   end
 
-  get '/create-listing' do
-    erb :create_listing
-  end
-
   get '/listing/:id' do
-    @listing = params['id']
-    erb :listing
+    Listing.listing_query(params['id']).to_json
   end
 
   post '/listings' do
-    Listing.create(list_name: params[:list_name], user_id: params[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
+    Listing.create(list_name: params[:list_name], user_id: session[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
     redirect '/'
   end
 
@@ -54,11 +50,9 @@ class MakersbnbApp < Sinatra::Base
   post '/log-in' do
     session[:user_id] = User.authenticate(params[:log_in_email], params[:log_in_password])
     if session[:user_id] == nil
-      string = "username or password incorrect, please try again"
-    else
-      string = "Log in successful"
+      redirect "/?login=Username or password incorrect, please try again"
     end
-    redirect "/?login=#{string}"
+    redirect '/'
   end
 
   post '/log-out' do

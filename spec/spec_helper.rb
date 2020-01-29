@@ -14,9 +14,15 @@ $LOAD_PATH << './app/controllers'
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rspec'
+require "selenium-webdriver"
+require 'puma'
 require 'app_controller'
 require 'web_helpers'
+require 'capybara/poltergeist'
 
+
+Capybara.javascript_driver = :selenium
+Capybara.server = :puma, { Silent: true }
 Capybara.app = MakersbnbApp
 
 
@@ -29,7 +35,7 @@ RSpec.configure do |config|
     user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
     user_id = user_id[0]['user_id']
     # add test messages
-    con.exec("INSERT INTO listings(list_name, user_id_fk) VALUES('Test listing 1', '#{user_id}') ;")
+    con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('Test listing 1', '#{user_id}', 'im a description', '100');")
     # add test comments
   end
 

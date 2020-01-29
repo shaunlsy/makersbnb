@@ -24,4 +24,8 @@ class Listing
   def self.create(list_name:, user_id:, short_description:, price_per_night:)
     @dbconnection.command("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('#{list_name}', '#{user_id}', '#{short_description}', '#{price_per_night}')")
   end
+
+  def self.listing_query(id)
+    @dbconnection.command("SELECT listing_id, list_name, short_description, price_per_night FROM listings WHERE listing_id='#{id}';")[0]
+  end
 end

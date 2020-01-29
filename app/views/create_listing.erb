@@ -1,8 +1,0 @@
-<h1> Insert Your Listing </h1>
-<form action='/listings' method="post">
-  Listing name: <input type="text" name="list_name"><br>
-  Description: <input type="text" name="short_description"><br>
-  Price per night: <input type="text" name="price_per_night">
-  <input type="hidden" name="user_id" value="<%= @dbconnection.command("SELECT user_id FROM users")[0]['user_id'] %>">
-  <input type='submit' value='Add listing'>
-</form>
