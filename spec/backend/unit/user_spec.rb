@@ -29,7 +29,7 @@ describe User do
     it 'returns nil if email is incorrect' do
       expect(User.authenticate('im_not_in_the_database@notanemail.moc', 'password')).to eq(nil)
     end
-    it 'returns nil if email is incorrect' do
+    it 'returns nil if password is incorrect' do
       User.create('test_username','test@test.com', 'password')
       expect(User.authenticate('test@test.com', 'wrong password')).to eq(nil)
     end

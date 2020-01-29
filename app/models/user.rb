@@ -20,7 +20,6 @@ class User
   end
 
   def self.authenticate(email, password)
-    p password
     begin
       database_password = @dbconnection.command("SELECT password FROM users WHERE email='#{email}';")[0]['password']
     rescue
@@ -30,7 +29,6 @@ class User
       user_id = @dbconnection.command("SELECT user_id FROM users WHERE email='#{email}';")[0]['user_id']
       return user_id
     else
-      p 'password fail'
       return nil
     end
   end

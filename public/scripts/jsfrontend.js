@@ -10,17 +10,21 @@ window.addEventListener("load", function() {
       $("#sign-up").slideToggle();
     })
 
-    $(".listing").click(function() {
+    $(".listing-outline").click(function() {
       var id = $(this).attr('id')
       $.get(`listing/${id}`, function(data) {
-        $(`#extra${id}`).html(data)
+        var jsonData = JSON.parse(data)
+        $(`#extra${id} .extra-title`).text(jsonData.list_name)
+        $(`#extra${id} .extra-description`).text(jsonData.short_description)
+        $(`#extra${id} .extra-price`).text(jsonData.price_per_night)
+        $(`#extra${id} .book-space`).atrr('value', `${jsonData.listing_id}`)
       })
+      $(`#extra${id}`).fadeToggle()
     })
 
-    // $(".extra").click(function() {
-    //   var id = $(this).attr('id')
-    //   $(`#${id}`).toggle()
-    // })
+    $("#create-listing").click(function() {
+      $('.add-listing').fadeToggle()
+    })
 
   })
 })

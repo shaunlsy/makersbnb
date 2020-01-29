@@ -1,2 +1,4 @@
+coverage
+coverage/*
 coverage/**
-DS_Store
+.DS_Store
