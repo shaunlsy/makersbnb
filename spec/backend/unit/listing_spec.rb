@@ -29,4 +29,10 @@ describe Listing do
       expect(subject.listing_query(listing_id)).to eq({'listing_id' => listing_id, 'list_name' => 'test name', 'short_description' => 'test description', 'price_per_night' => '150'})
     end
   end
+
+  describe '.my_listings' do
+    it 'returns the users' do
+      expect(subject.my_listings(@user_id)[0].list_name).to eq 'Test listing 1'
+    end
+  end
 end
