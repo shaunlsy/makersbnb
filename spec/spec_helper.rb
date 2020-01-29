@@ -35,7 +35,7 @@ RSpec.configure do |config|
     user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
     user_id = user_id[0]['user_id']
     # add test listing
-    listing_id = con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_nigh) VALUES('Test listing 1', '#{user_id}', 'im a description', '100') RETURNING listing_id;")
+    listing_id = con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('Test listing 1', '#{user_id}', 'im a description', '100') RETURNING listing_id;")
     listing_id = listing_id[0]['listing_id']
     # add test messages
   
