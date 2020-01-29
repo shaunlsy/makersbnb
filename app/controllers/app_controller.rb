@@ -62,6 +62,10 @@ class MakersbnbApp < Sinatra::Base
     redirect '/'
   end
 
+  get '/myaccount' do
+    erb :myaccount
+  end
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end
