@@ -11,6 +11,7 @@ require 'json'
 require 'database_connection'
 require 'listing'
 require 'user'
+require 'booking'
 
 
 
@@ -23,6 +24,7 @@ class MakersbnbApp < Sinatra::Base
   DatabaseConnection.add_details(dbname: 'makersbnb', user: ENV['USER'], dbms: PG)
   Listing.setup(DatabaseConnection)
   User.setup(DatabaseConnection)
+  Booking.setup(DatabaseConnection)
 
   enable :sessions
 

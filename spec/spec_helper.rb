@@ -34,15 +34,19 @@ RSpec.configure do |config|
     # add test user
     user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
     user_id = user_id[0]['user_id']
+    # add test listing
+    listing_id = con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_nigh) VALUES('Test listing 1', '#{user_id}', 'im a description', '100') RETURNING listing_id;")
+    listing_id = listing_id[0]['listing_id']
     # add test messages
-    con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('Test listing 1', '#{user_id}', 'im a description', '100');")
+  
     # add test comments
+    con.exec("INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('#{listing_id}','#{user_id}','2020-01-02','2020-01-05','TRUE');")
   end
 
   config.after(:each) do
     con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
     # wipe database after test
-    con.exec("TRUNCATE users, listings;")
+    con.exec("TRUNCATE users, listings, bookings;")
   end
 
   # Use color not only in STDOUT but also in pagers and files
