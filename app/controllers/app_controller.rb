@@ -33,7 +33,6 @@ class MakersbnbApp < Sinatra::Base
   end
 
   get '/create-listing' do
-    @dbconnection = DatabaseConnection
     erb :create_listing
   end
 

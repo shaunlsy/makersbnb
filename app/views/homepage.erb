@@ -21,9 +21,12 @@
         <div id='user-logged-in'> Welcome <%=@user.username%>
         </div>
         <div id='listing-button'>
-          <form action="/create-listing" method="get">
+          <!-- <form action="/create-listing" method="get"> -->
             <button class="btn" id="create-listing">Create a new listing!</button>
-          </form>
+          <!-- </form> -->
+        </div>
+        <div class='add-listing'>
+          <!-- add lisitng form -->
         </div>
       <%end%>
     </div>
@@ -78,7 +81,7 @@
 
       <div class='listing-outline'>
         <div class="image">
-          <img src="media/cool_house<%=i%>.jpg" height= 200px>
+          <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
         </div>
         <div class="overview">
             <%= listing.list_name %> by <%= listing.username%><br>

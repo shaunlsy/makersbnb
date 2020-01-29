@@ -17,6 +17,12 @@ window.addEventListener("load", function() {
       })
     })
 
+    $("#create-listing").click(function() {
+      $.get('create-listing', function(data) {
+        $('.add-listing').html(data)
+      })
+    })
+
     // $(".extra").click(function() {
     //   var id = $(this).attr('id')
     //   $(`#${id}`).toggle()
