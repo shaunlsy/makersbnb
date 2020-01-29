@@ -63,6 +63,8 @@ class MakersbnbApp < Sinatra::Base
   end
 
   get '/myaccount' do
+    @user = User.find(session[:user_id])
+    @mylistings = Listing.my_listings(session[:user_id])
     erb :myaccount
   end
 
