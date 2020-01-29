@@ -1,13 +1,9 @@
 feature 'logging out' do
-  scenario 'it allows a user to logut' do
-    visit '/'
-    fill_in("username", with: 'User')
-    fill_in("email", with: 'user@test.com')
-    fill_in("password", with: 'password')
-    click_button 'Sign up'
+  scenario 'it allows a user to logut', js: true do
+    login
 
-    
-    click_button 'Log out'
+    find('.drop-down-container').hover
+    find(:xpath, "//a[@href='/?logout=true']").click
     expect(page).to_not have_content "Welcome User"
   end
 end

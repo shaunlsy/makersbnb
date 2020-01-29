@@ -5,7 +5,7 @@ feature 'create listings' do
     expect(page).to have_content 'Insert Your Listing'
   end
 
-  scenario "user clicks creates listing" do
+  scenario "user creates listing" do
     login
     click_button 'Create a new listing!'
     fill_in("list_name", with: "Users house")

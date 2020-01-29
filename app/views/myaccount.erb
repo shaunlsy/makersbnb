@@ -25,17 +25,12 @@
 
       <% if @user.logged_in %>
 
-        <div class='user-buttons'>
-          <div class='log-in-buttons'>
-            <span class='btn'>
-              <%=@user.username%>
-            </span>
-
-            <span>
-              <form action='/log-out' method="post">
-                <input class="btn" type="submit" value='Log out' placeholder="Log out">
-              </form>
-            </span>
+        <div class='drop-down-container'>
+          <button class='dropbtn' id='userbutton'><%=@user.username%></button>
+          <div class='dropdown-content'>
+            <a class='dropdown-btn' href='/'>Homepage</a>
+            <a class='dropdown-btn' href='/myaccount'>My Account</a>
+            <a class='dropdown-btn' href='/?logout=true'>Logout</a>
           </div>
         </div>
 
