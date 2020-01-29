@@ -55,18 +55,63 @@ body {
   left: 20px;
 }
 
-.user-buttons {
-  width: 65%;
-  height: 100%;
+/* -------- DROP DOWN LIST --------- */
+
+.drop-down-container {
+  position: relative;
+  top: 20px
+  height: auto;
+  width: auto;
   float: right;
-  text-align: right;
 }
 
-.log-in-buttons {
+.dropbtn {
+  border: none;
+  cursor: pointer;
   position: relative;
-  top: 20px;
-  right: 10px;
+  min-width: 160px;
+  min-height: 50px;
+  background: #F7F7F7;
+  font-weight: 500;
+  font-size: 20px;
 }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-btn {
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-btn:hover {
+  /* background-color: rgb(216, 212, 212); */
+  background-color: rgb(56, 58, 61);
+  border: 1pt thin black;
+  color: white;
+}
+
+.dropbtn:hover {
+  /* background-color: rgb(216, 212, 212); */
+  background-color: rgb(56, 58, 61);
+  color: white;
+
+}
+
+.drop-down-container:hover .dropdown-content {
+  display: block;
+}
+
+/* ------------------------ */
 
 .log-in-forms {
   position: relative;

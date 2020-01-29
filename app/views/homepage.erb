@@ -21,9 +21,7 @@
         <div id='user-logged-in'> Welcome <%=@user.username%>
         </div>
         <div id='listing-button'>
-          <!-- <form action="/create-listing" method="get"> -->
             <button class="btn" id="create-listing">Create a new listing!</button>
-          <!-- </form> -->
         </div>
         <div class='add-listing'>
           <h1> Insert Your Listing </h1>
@@ -37,10 +35,9 @@
       <%end%>
     </div>
 
+    <% unless @user.logged_in %>
 
-    <div class='user-buttons'>
-
-      <% unless @user.logged_in %>
+      <div class='user-buttons'>
 
         <div class='log-in-buttons'>
           <button id='newbutton' class="log-in-button">Log in</button>
@@ -64,20 +61,21 @@
             <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
           </form>
         </div>
-      <% end %>
+      </div>
+    <% end %>
 
-      <% if @user.logged_in %>
-        <div class='log-in-buttons'>
-        <span><form action='/myaccount'>
-          <input class="btn" id="myaccount" type="submit" value='My Account'>
-          </form></span>
-          <form action='/log-out' method="post">
-          <input class="btn" type="submit" value='Log out' placeholder="Log out">
-          </form>
+    <% if @user.logged_in %>
+
+      <div class='drop-down-container'>
+        <button class='dropbtn'><%=@user.username%></button>
+        <div class='dropdown-content'>
+          <a class='dropdown-btn' href='/'>Homepage</a>
+          <a class='dropdown-btn' href='/myaccount'>My Account</a>
+          <a class='dropdown-btn' href='/?logout=true'>Logout</a>
         </div>
-      <% end %>
+      </div>
 
-    </div>
+    <% end %>
 
   </header>
 

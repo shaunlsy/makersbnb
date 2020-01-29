@@ -29,6 +29,10 @@ class MakersbnbApp < Sinatra::Base
   enable :sessions
 
   get '/' do
+    if params['logout'] == 'true'
+      session[:user_id] = nil
+      redirect '/'
+    end
     @log_in_action = params[:login]
     @list_of_listings = Listing.all
     @user = User.find(session[:user_id])
@@ -54,11 +58,6 @@ class MakersbnbApp < Sinatra::Base
     if session[:user_id] == nil
       redirect "/?login=Username or password incorrect, please try again"
     end
-    redirect '/'
-  end
-
-  post '/log-out' do
-    session[:user_id] = nil
     redirect '/'
   end
 
