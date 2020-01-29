@@ -1,1 +1,79 @@
-account overview
+<head>
+
+  <meta carset=”utf-8>
+  <title>Makersbnb</title>
+
+  <link type="text/css" rel="stylesheet" href="css/myaccount-style.css"></link>
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <header class='header'>
+
+      <div class='title'>
+        <div id='main-title'><strong>Makersbnb</strong></div>
+
+        <% if @user.logged_in %>
+          <div id='user-logged-in'>My Account</div>
+        <% end %>
+
+      </div>
+
+      <% if @user.logged_in %>
+
+        <div class='user-buttons'>
+          <div class='log-in-buttons'>
+            <span class='btn'>
+              <%=@user.username%>
+            </span>
+
+            <span>
+              <form action='/log-out' method="post">
+                <input class="btn" type="submit" value='Log out' placeholder="Log out">
+              </form>
+            </span>
+          </div>
+        </div>
+
+      <% end %>
+    </header>
+
+  <% if @user.logged_in %>
+
+    <section class='mylistings'>
+      <h2> My Listings </h2>
+
+      <div class='display-listings'>
+        <% @mylistings.each_with_index do |listing, i| %>
+
+          <div class='listing'>
+            <div class='listing-full' id='<%=listing.list_id%>'>
+              <div class="image">
+                <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+              </div>
+              <div class="overview">
+                  <%= listing.list_name %> by <%= listing.username%><br>
+                  Description: <%= listing.short_description%>
+                  Price per night: £<%= listing.price_per_night%>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </section>
+
+  <% else %>
+    User not logged in
+  <% end %>
+
+  <footer class='footer'>
+    Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
+  </footer>
+
+  <script src="scripts/jsfrontend.js"></script>
+</body>
