@@ -1,4 +1,5 @@
 require 'booking'
+
 describe Booking do
 
   let(:subject){ Booking }
@@ -51,6 +52,13 @@ describe Booking do
     it 'returns empty array if no bookings' do
       bookings = subject.bookings(1000000)
       expect(bookings).to eq([])
+    end
+  end
+  
+  describe ".get_blocked_dates_range" do
+    it "returns the range of dates from start date to the end date" do
+      subject.create(listing_id: @listing_id, user_id: @user_id, start_date:'2020-07-08', end_date:'2020-07-10')
+      expect(subject.get_blocked_dates_range(listing_id: @listing_id)).to eq(["2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-07-08", "2020-07-09", "2020-07-10"])
     end
   end
 end

@@ -41,7 +41,9 @@ class MakersbnbApp < Sinatra::Base
   end
 
   get '/listing/:id' do
-    Listing.listing_query(params['id']).to_json
+    data_hash = Listing.listing_query(params['id'])
+    data_hash['date_range'] = Booking.get_blocked_dates_range(listing_id: params['id'])
+    data_hash.to_json
   end
 
   post '/listing' do
@@ -83,6 +85,20 @@ class MakersbnbApp < Sinatra::Base
     Booking.decline(booking_id: params['id'])
     'Booking Declined'
   end
+
+  post '/make-booking' do
+    @user = session[:user_id]
+    session[:start_date] = params[:start_date]
+    session[:end_date] = params[:end_date]
+    session[:listing_id] = params[:listing_id]
+    Booking.create(listing_id: session[:listing_id] ,user_id: @user, start_date: session[:start_date], end_date: session[:end_date], confirmation: false)
+    redirect '/make-booking'
+  end
+
+  get '/make-booking' do
+    erb :booking_confirmation
+  end
+
 
   # start the server if ruby file executed directly
   run! if $0 == __FILE__

@@ -1,3 +1,4 @@
+require 'date'
 class Booking
 
   attr_reader :booking_id, :confirmation, :start_date, :end_date, :list_name, :user, :price_per_night, :nights, :total_price
@@ -32,7 +33,6 @@ class Booking
 
 
   def self.bookings(id)
-
     bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, u.username, l.list_name, l.price_per_night FROM bookings b JOIN users u ON (b.user_id_fk=u.user_id) JOIN listings l ON (b.listing_id_fk=l.listing_id) WHERE b.listing_id_fk IN (SELECT listing_id FROM listings WHERE user_id_fk='#{id}');")
 
     if bookings == nil
@@ -44,6 +44,12 @@ class Booking
       total = nights * booking['price_per_night'].to_i
       self.new(booking['booking_id'], booking['confirmation'], booking['start_date'], booking['end_date'], booking['list_name'], booking['username'], booking['price_per_night'], nights , total)}
   end
+  
+  def self.get_blocked_dates_range(listing_id:)
+    dates = @dbconnection.command("SELECT start_date, end_date FROM bookings WHERE listing_id_fk='#{listing_id}'")
+    booked_dates = dates.map{|booking| (Date.parse(booking['start_date'])..Date.parse(booking['end_date'])).to_a.map{|date| date.to_s}}
+    booked_dates.flatten
+  end
 
   private
 
@@ -52,5 +58,4 @@ class Booking
     end_date = Date.parse(end_d)
     (end_date - start_date).to_i
   end
-
 end
