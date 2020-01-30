@@ -8,7 +8,8 @@ def login
 end
 
 def add_listing
-  click_button 'Create a new listing!'
+  find('.drop-down-container').hover
+  find(:xpath, "//a[@id='create-listing']").click
   fill_in("list_name", with: "Users house")
   fill_in("short_description", with: "My house is superb!")
   fill_in("price_per_night", with: "150")

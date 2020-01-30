@@ -21,9 +21,6 @@
       <% if @user.logged_in %>
         <div id='user-logged-in'> Welcome <%=@user.username%>
         </div>
-        <div id='listing-button'>
-            <button class="btn" id="create-listing">Create a new listing!</button>
-        </div>
         <div class='add-listing'>
           <h1> Insert Your Listing </h1>
           <form action='/listings' method="post">
@@ -41,8 +38,8 @@
       <div class='user-buttons'>
 
         <div class='log-in-buttons'>
-          <button id='newbutton' class="log-in-button">Log in</button>
-          <button class="sign-up-button">Register</button>
+          <button class="dropbtn" id='login-btn'>Log in</button>
+          <button class="dropbtn" id='register-btn'>Register</button>
         </div>
 
         <div class='log-in-forms' id="log-in">
@@ -72,6 +69,7 @@
         <div class='dropdown-content'>
           <a class='dropdown-btn' href='/'>Homepage</a>
           <a class='dropdown-btn' href='/myaccount'>My Account</a>
+          <a class='dropdown-btn' id='create-listing'>Create Listing</a>
           <a class='dropdown-btn' href='/?logout=true'>Logout</a>
         </div>
       </div>

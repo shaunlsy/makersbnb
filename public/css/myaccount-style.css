@@ -47,6 +47,12 @@ body {
   padding-bottom: 20px;
 }
 
+.add-listing {
+  display: none;
+  position: relative;
+  left: 20px;
+}
+
 /* -------- DROP DOWN LIST --------- */
 
 .drop-down-container {
@@ -94,7 +100,6 @@ body {
 }
 
 .dropbtn:hover {
-  /* background-color: rgb(216, 212, 212); */
   background-color: rgb(56, 58, 61);
   color: white;
 
@@ -138,9 +143,6 @@ body {
 }
 .btn:hover {
   background: #eee;
-}
-.info {
-  color: dodgerblue;
 }
 
 /* -------- LISTINGS CONTAINER --------- */
@@ -195,7 +197,6 @@ body {
 }
 
 .navbtn:hover {
-  /* background-color: rgb(216, 212, 212); */
   background-color: rgb(56, 58, 61);
   border: 1pt thin black;
   color: white;

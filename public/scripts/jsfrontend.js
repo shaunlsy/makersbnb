@@ -2,12 +2,16 @@
 
 window.addEventListener("load", function() {
   $(document).ready(function() {
-    $(".log-in-button").click(function() {
+    $("#login-btn").click(function() {
       $("#log-in").slideToggle();
     })
 
-    $(".sign-up-button").click(function() {
+    $("#register-btn").click(function() {
       $("#sign-up").slideToggle();
+    })
+
+    $("#create-listing").click(function() {
+      $('.add-listing').fadeToggle()
     })
 
     $(".listing-outline").click(function() {
@@ -20,14 +24,6 @@ window.addEventListener("load", function() {
         $(`#extra${id} .book-space`).atrr('value', `${jsonData.listing_id}`)
       })
       $(`#extra${id}`).fadeToggle()
-    })
-
-    $("#create-listing").click(function() {
-      $('.add-listing').fadeToggle()
-    })
-
-    $("#myaccount").click(function() {
-      window.location.href = "/myaccount"
     })
 
   })
