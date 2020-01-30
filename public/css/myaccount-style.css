@@ -8,20 +8,23 @@ body {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
+  background-image: url("https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-repeat: no-repeat;
+  background-attachment: fixed
 }
 
 .header {
   padding: 10px 20px;
-  background: #F7F7F7;
+  background: rgba(247, 247, 247, 0);
   position: relative;
   top: 0px;
   height: auto;
 }
 
 .footer {
-  background: #F7F7F7;
   position: relative;
   top: 0px;
+  color: white;
 }
 
 .title {
@@ -70,7 +73,7 @@ body {
   position: relative;
   min-width: 160px;
   min-height: 50px;
-  background: #F7F7F7;
+  background-color: rgb(255, 255, 255, 0);
   font-weight: 500;
   font-size: 20px;
 }
@@ -148,7 +151,7 @@ body {
 /* -------- LISTINGS CONTAINER --------- */
 
 .listing-container {
-  background: #F7F7F7;
+  background-color: rgb(255, 255, 255, 0);
   display: flex;
   flex-wrap: nowrap;
   position: relative;
@@ -156,7 +159,7 @@ body {
 }
 
 .listing-navigation {
-  background: #F7F7F7;
+  background-color: rgb(255, 255, 255, 0);
   width: 15%;
   text-align: center;
   display: flex;
@@ -169,7 +172,7 @@ body {
 }
 
 .mylistings {
-  background: white;
+  background-color: rgb(255, 255, 255, 0);
   width: 85%;
   height: auto;
 }
@@ -187,6 +190,7 @@ body {
 }
 
 .navbtn {
+  background-color: rgb(255, 255, 255, 0.5);
   width: 90%;
   color: black;
   padding: 14px 28px;
@@ -209,7 +213,7 @@ body {
 .display-listings {
   display: flex;
   flex-wrap: nowrap;
-  background-color: rgb(56, 58, 61);
+  
   flex-direction: column;
   text-align: center;
   padding: 10px 20px;
@@ -219,7 +223,7 @@ body {
 
 .listing {
   margin: 10px;
-  background-color: rgb(216, 212, 212);
+  background-color: rgb(255, 255, 255, 0.9);
   text-align: left;
   line-height: 75px;
   font-size: 30px;
