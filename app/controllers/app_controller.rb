@@ -13,6 +13,7 @@ require 'database_connection'
 require 'listing'
 require 'user'
 require 'booking'
+require 'message'
 
 
 
@@ -26,6 +27,7 @@ class MakersbnbApp < Sinatra::Base
   Listing.setup(DatabaseConnection)
   User.setup(DatabaseConnection)
   Booking.setup(DatabaseConnection)
+  Message.setup(DatabaseConnection)
 
   enable :sessions
 
@@ -99,7 +101,6 @@ class MakersbnbApp < Sinatra::Base
   get '/make-booking' do
     erb :booking_confirmation
   end
-
 
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
