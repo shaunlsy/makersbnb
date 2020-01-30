@@ -25,6 +25,11 @@ window.addEventListener("load", function() {
       })
       $(`#extra${id}`).fadeToggle()
     })
+  
+    $(function() {
+        $("#startdatepicker").datepicker();
+        $("#enddatepicker").datepicker();
+    });
 
   })
 })

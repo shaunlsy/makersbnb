@@ -9,7 +9,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -101,7 +105,14 @@
             <div><strong>Price: </strong><span class='extra-price'></span></div>
           </div>
           <div class='#extra-button'>
-          <button class='btn' id='book-space'>Book Space!</button>
+            <% if @user.logged_in %>
+            <form action="/make-booking" method="post">
+            <input type="hidden" name='listing_id' value='<%=listing.list_id%>'>
+              Start Date: <input type="text" name='start_date' id="startdatepicker">
+              End Date: <input type="text" name='end_date' id="enddatepicker">
+              <button class='btn' name='Book Space!' id='book-space'>Book Space!</button>
+              </form>
+            <% end %>
           </div>
         </div>
       </div>
