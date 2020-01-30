@@ -45,13 +45,16 @@ task :development_tables => [:database] do
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, email VARCHAR, password VARCHAR);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE messages(message_id SERIAL PRIMARY KEY, receiver_id_fk INTEGER REFERENCES users(user_id), messenger_id_fk INTEGER REFERENCES users(user_id), message VARCHAR, time_inserted TIMESTAMP DEFAULT current_timestamp);"]
 end
 
 task :seed_development_tables => [:development_tables] do
   puts 'Adding to development database...'
-  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO users(username, email, password) VALUES('test-username', 'test@test.com', 'password');"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO users(username, email, password) VALUES('test-username-1', 'test-1@test.com', 'password');"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO users(username, email, password) VALUES('test-username-2', 'test-2@test.com', 'password');"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('The makers loft', '1', 'Beautiful house', '123');"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('1', '1', '2020-01-01', '2020-02-01', 'true');"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="INSERT INTO messages(receiver_id_fk, messenger_id_fk, message) VALUES('1', '2', 'Hello User 1');"]
 end
 
 task :test_tables => [:seed_development_tables] do
@@ -59,6 +62,7 @@ task :test_tables => [:seed_development_tables] do
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, email VARCHAR, password VARCHAR);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE messages(message_id SERIAL PRIMARY KEY, receiver_id_fk INTEGER REFERENCES users(user_id), messenger_id_fk INTEGER REFERENCES users(user_id), message VARCHAR, time_inserted TIMESTAMP DEFAULT current_timestamp);"]
 end
 
 task :production_database do
@@ -72,4 +76,5 @@ task :production_database do
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, password VARCHAR);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE messages(message_id SERIAL PRIMARY KEY, receiver_id_fk INTEGER REFERENCES users(user_id), messenger_id_fk INTEGER REFERENCES users(user_id), message VARCHAR, time_inserted TIMESTAMP DEFAULT current_timestamp);"]
 end
