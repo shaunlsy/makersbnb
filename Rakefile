@@ -43,7 +43,7 @@ end
 task :development_tables => [:database] do
   puts 'Creating development tables...'
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, email VARCHAR, password VARCHAR);"]
-  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER, img_ref SERIAL);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-development --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
 end
 
@@ -57,7 +57,7 @@ end
 task :test_tables => [:seed_development_tables] do
   puts 'Creating test tables...'
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, email VARCHAR, password VARCHAR);"]
-  sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER, img_ref SERIAL);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-test --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
 end
 
@@ -70,6 +70,6 @@ task :production_database do
   end
   puts 'Creating production tables...'
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE users(user_id SERIAL PRIMARY KEY, username VARCHAR, password VARCHAR);"]
-  sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER);"]
+  sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE listings(listing_id SERIAL PRIMARY KEY, list_name VARCHAR, user_id_fk INTEGER REFERENCES users(user_id), short_description VARCHAR, price_per_night INTEGER, img_ref SERIAL);"]
   sh %Q[psql -U #{ENV['USER']} -d makersbnb-production --command="CREATE TABLE bookings(booking_id SERIAL PRIMARY KEY, listing_id_fk INTEGER REFERENCES listings(listing_id), user_id_fk INTEGER REFERENCES users(user_id), start_date DATE, end_date DATE, confirmation BOOLEAN);"]
 end

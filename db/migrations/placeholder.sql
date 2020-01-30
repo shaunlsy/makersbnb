@@ -12,7 +12,8 @@ CREATE TABLE listings
   list_name VARCHAR,
   user_id_fk INTEGER REFERENCES users(user_id),
   short_description VARCHAR,
-  price_per_night INTEGER
+  price_per_night INTEGER,
+  img_ref SERIAL
 );
 
 CREATE TABLE bookings
