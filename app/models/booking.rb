@@ -35,23 +35,29 @@ class Booking
   def self.bookings(id)
     bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, u.username, l.list_name, l.price_per_night FROM bookings b JOIN users u ON (b.user_id_fk=u.user_id) JOIN listings l ON (b.listing_id_fk=l.listing_id) WHERE b.listing_id_fk IN (SELECT listing_id FROM listings WHERE user_id_fk='#{id}');")
 
-    if bookings == nil
-      return []
-    end
-
-    bookings.map{ |booking|
-      nights = number_of_nights(booking['start_date'], booking['end_date'])
-      total = nights * booking['price_per_night'].to_i
-      self.new(booking['booking_id'], booking['confirmation'], booking['start_date'], booking['end_date'], booking['list_name'], booking['username'], booking['price_per_night'], nights , total)}
+    bookings == nil ? [] : self.create_booking_instance(bookings)
   end
-  
+
   def self.get_blocked_dates_range(listing_id:)
     dates = @dbconnection.command("SELECT start_date, end_date FROM bookings WHERE listing_id_fk='#{listing_id}'")
     booked_dates = dates.map{|booking| (Date.parse(booking['start_date'])..Date.parse(booking['end_date'])).to_a.map{|date| date.to_s}}
     booked_dates.flatten
   end
 
+  def self.trips(id)
+    bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, u.username, l.list_name, l.price_per_night FROM bookings b JOIN listings l ON (b.listing_id_fk=l.listing_id) JOIN users u ON (l.user_id_fk=u.user_id) WHERE b.user_id_fk='#{id}';")
+
+    bookings == nil ? [] : self.create_booking_instance(bookings)
+  end
+
   private
+
+  def self.create_booking_instance(bookings)
+    bookings.map{ |booking|
+      nights = number_of_nights(booking['start_date'], booking['end_date'])
+      total = nights * booking['price_per_night'].to_i
+      self.new(booking['booking_id'], booking['confirmation'], booking['start_date'], booking['end_date'], booking['list_name'], booking['username'], booking['price_per_night'], nights , total)}
+  end
 
   def self.number_of_nights(start_d, end_d)
     start_date = Date.parse(start_d)

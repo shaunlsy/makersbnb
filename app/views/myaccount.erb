@@ -47,6 +47,36 @@
         </div>
 
       <% end %>
+
+      <% unless @user.logged_in %>
+
+        <div class='user-buttons'>
+
+          <div class='log-in-buttons'>
+            <button class="dropbtn" id='login-btn'>Log in</button>
+            <button class="dropbtn" id='register-btn'>Register</button>
+          </div>
+
+          <div class='log-in-forms' id="log-in">
+            <%= @log_in_action %>
+            <form action='/log-in' method="post">
+              Email: <input type="text" name="log_in_email" placeholder="Email" required>
+              Password: <input type="password" name="log_in_password" minlength="8" required>
+              <input class="btn" type="submit" value='log in'>
+            </form>
+          </div>
+
+          <div class='log-in-forms' id='sign-up'>
+            <form action="/sign-up" method="post">
+              Username: <input type="text" name="username" placeholder="username" required>
+              Email: <input type="text" name="email" placeholder="E-mail" required>
+              Password: <input type="password" name="password" minlength="8" required>
+              <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
+            </form>
+          </div>
+        </div>
+      <% end %>
+
     </header>
 
   <% if @user.logged_in %>
@@ -154,23 +184,73 @@
             <h3> No pending bookings </h3>
           <% end %>
         </div>
-
       </div>
-
       <div class='mylistings' id='trips'>
         <h2> My Trips </h2>
 
-        <div id='trips-confirmed'>
+        <div id='bookings-confirmed'>
           <h3> Confirmed Trips</h3>
-          <div class='display-listings'>
-            test confirmed trips
-          </div>
+          <% if @my_trips_confirmed %>
+            <div class='display-listings'>
+              <% @my_trips_confirmed.each_with_index do |trips, i| %>
+
+                <div class='listing'>
+                  <div class='listing-full' id='<%=trips.booking_id%>'>
+                    <div class="image">
+                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                    </div>
+
+                    <div class="overview">
+                      Space: <%= trips.list_name %><br>
+                      Booking reference: <%= trips.booking_id%><br>
+                      User: <%= trips.user%><br>
+                      Price per night: £<%= trips.price_per_night%><br>
+                      Start date: <%= trips.start_date%><br>
+                      End date: <%= trips.end_date%><br>
+                      Number of nights: <%= trips.nights%><br>
+                      Total price: £<%= trips.total_price%>
+                    </div>
+
+                  </div>
+                </div>
+
+              <% end %>
+            </div>
+          <% else %>
+            <h3> No confirmed trips </h3>
+          <% end %>
         </div>
         <div id='trips-pending'>
           <h3> Pending Trips</h3>
-          <div class='display-listings'>
-            test pending trips
-          </div>
+          <% if @my_trips_pending %>
+            <div class='display-listings'>
+              <% @my_trips_pending.each_with_index do |trip, i| %>
+
+                <div class='listing'>
+                  <div class='listing-full' id='<%=trip.booking_id%>'>
+                    <div class="image">
+                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                    </div>
+
+                    <div class="overview">
+                      Space: <%= trip.list_name %><br>
+                      Booking reference: <%= trip.booking_id%><br>
+                      User: <%= trip.user%><br>
+                      Price per night: £<%= trip.price_per_night%><br>
+                      Start date: <%= trip.start_date%><br>
+                      End date: <%= trip.end_date%><br>
+                      Number of nights: <%= trip.nights%><br>
+                      Total price: £<%= trip.total_price%>
+                    </div>
+
+                  </div>
+                </div>
+
+              <% end %>
+            </div>
+          <% else %>
+            <h3> No pending trips </h3>
+          <% end %>
         </div>
 
       </div>
