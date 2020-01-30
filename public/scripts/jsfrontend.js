@@ -57,15 +57,8 @@ window.addEventListener("load", function() {
     var nextBookedDate = function(blockedDates, selectedDate) {
       var selected = new Date(selectedDate)
       var arr = blockedDates.map(function(i) { return new Date(i)});
-
-      console.log(arr)
-
       var datesAbove = arr.filter(function(i) { return i >= selected })
-
-      console.log(datesAbove)
-
       var maxDate = datesAbove[0]
-
       return maxDate
     }
 
