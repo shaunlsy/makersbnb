@@ -88,10 +88,8 @@ class MakersbnbApp < Sinatra::Base
 
   post '/make-booking' do
     @user = session[:user_id]
-    session[:start_date] = params[:start_date]
-    session[:end_date] = params[:end_date]
-    session[:listing_id] = params[:listing_id]
-    Booking.create(listing_id: session[:listing_id] ,user_id: @user, start_date: session[:start_date], end_date: session[:end_date], confirmation: false)
+    p params
+    Booking.create(listing_id: params[:listing_id] ,user_id: @user, start_date: params[:start_date], end_date: params[:end_date], confirmation: false)
     redirect '/make-booking'
   end
 
