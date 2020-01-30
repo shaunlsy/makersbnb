@@ -17,7 +17,7 @@ window.addEventListener("load", function() {
 
     $("#mytripsbtn").click(function() {
       $("#bookings").css('display', 'none');
-      $("#trips").css('display', 'none');
+      $("#listings").css('display', 'none');
       $("#trips").css('display', 'block');
     })
 
@@ -27,6 +27,7 @@ window.addEventListener("load", function() {
         console.log(`clicked ${booking_id}`)
         console.log(response)
       }})
+      $(`#${booking_id}`).fadeToggle()
     })
 
     $("#decline-booking").click(function() {

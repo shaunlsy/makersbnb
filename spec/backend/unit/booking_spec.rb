@@ -56,9 +56,17 @@ describe Booking do
   end
 
   describe ".get_blocked_dates_range" do
-    it "returns the range of dates from start date to the end date" do
+    it 'returns the range of dates from start date to the end date' do
       subject.create(listing_id: @listing_id, user_id: @user_id, start_date:'2020-07-08', end_date:'2020-07-10')
       expect(subject.get_blocked_dates_range(listing_id: @listing_id)).to eq(["2020-01-02", "2020-01-03", "2020-01-04", "2020-01-05", "2020-02-02", "2020-02-03", "2020-02-04", "2020-02-05", "2020-07-08", "2020-07-09", "2020-07-10"])
+    end
+  end
+
+  describe '.trips' do
+    it 'returns all bookings for the logged in user' do
+      trips = subject.trips(@user_id)
+      expect(trips).to all(be_a(Booking))
+      expect(trips[0].list_name).to eq('Test listing 1')
     end
   end
 end
