@@ -24,6 +24,15 @@ describe Booking do
     end
   end
 
+  describe ".decline" do
+    it "deleted booking when declined" do
+      booking_id = DatabaseConnection.command("SELECT booking_id FROM bookings WHERE confirmation='f'")
+      booking_id.each{|booking| subject.decline(booking_id: booking['booking_id'])}
+      pending_bookings = subject.bookings(@user_id).select{|booking| booking.confirmation == false}
+      expect(pending_bookings).to eq []
+    end
+  end
+
   describe '.bookings' do
     it 'returns pending bookings for a user' do
       bookings = subject.bookings(@user_id)
