@@ -6,6 +6,7 @@ $LOAD_PATH << './app/models'
 require 'sinatra'
 require 'pg'
 require 'json'
+require 'date'
 
 # Models
 require 'database_connection'
@@ -63,7 +64,13 @@ class MakersbnbApp < Sinatra::Base
 
   get '/myaccount' do
     @user = User.find(session[:user_id])
+    p session[:user_id]
     @mylistings = Listing.my_listings(session[:user_id])
+
+
+    bookings = Booking.bookings(session[:user_id])
+    @my_bookings_pending = bookings.select{|booking| booking.confirmation == false}
+    @my_bookings_confirmed = bookings.select{|booking| booking.confirmation == true}
     erb :myaccount
   end
 

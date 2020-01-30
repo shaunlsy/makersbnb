@@ -88,15 +88,71 @@
 
         <div id='bookings-confirmed'>
           <h3> Confirmed Bookings</h3>
-          <div class='display-listings'>
-            test confirmed bookings
-          </div>
+          <% if @my_bookings_confirmed %>
+            <div class='display-listings'>
+              <% @my_bookings_confirmed.each_with_index do |booking, i| %>
+
+                <div class='listing'>
+                  <div class='listing-full' id='<%=booking.listing_id%>'>
+                    <div class="image">
+                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                    </div>
+
+                    <div class="overview">
+                      Space: <%= booking.list_name %><br>
+                      Booking reference: <%= booking.booking_id%><br>
+                      User: <%= booking.user%><br>
+                      Price per night: £<%= booking.price_per_night%><br>
+                      Start date: <%= booking.start_date%><br>
+                      End date: <%= booking.end_date%><br>
+                      Number of nights: <%= booking.nights%><br>
+                      Total price: £<%= booking.total_price%>
+                    </div>
+
+                  </div>
+                </div>
+
+              <% end %>
+            </div>
+          <% else %>
+            <h3> No confirmed bookings </h3>
+          <% end %>
         </div>
         <div id='bookings-pending'>
           <h3> Pending Bookings</h3>
-          <div class='display-listings'>
-            test pending bookings
-          </div>
+          <% if @my_bookings_pending %>
+            <div class='display-listings'>
+              <% @my_bookings_pending.each_with_index do |booking, i| %>
+
+                <div class='listing'>
+                  <div class='listing-full' id='<%=booking.listing_id%>'>
+                    <div class="image">
+                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                    </div>
+
+                    <div class="overview">
+                      Space: <%= booking.list_name %><br>
+                      Booking reference: <%= booking.booking_id%><br>
+                      User: <%= booking.user%><br>
+                      Price per night: £<%= booking.price_per_night%><br>
+                      Start date: <%= booking.start_date%><br>
+                      End date: <%= booking.end_date%><br>
+                      Number of nights: <%= booking.nights%><br>
+                      Total price: £<%= booking.total_price%>
+                    </div>
+
+                    <div class='confirm-btn'>
+                      <button class='btn' id='accept-booking' value='<%=booking.listing_id%>'>Accept Booking</button>
+                      <button class='btn' id='decline-booking' value='<%=booking.listing_id%>'>Decline Booking</button>
+                    </div>
+                  </div>
+                </div>
+
+              <% end %>
+            </div>
+          <% else %>
+            <h3> No pending bookings </h3>
+          <% end %>
         </div>
 
       </div>

@@ -38,9 +38,10 @@ RSpec.configure do |config|
     listing_id = con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('Test listing 1', '#{user_id}', 'im a description', '100') RETURNING listing_id;")
     listing_id = listing_id[0]['listing_id']
     # add test messages
-  
+
     # add test comments
     con.exec("INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('#{listing_id}','#{user_id}','2020-01-02','2020-01-05','TRUE');")
+    con.exec("INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('#{listing_id}','#{user_id}','2020-02-02','2020-02-05','FALSE');")
   end
 
   config.after(:each) do
