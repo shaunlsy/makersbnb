@@ -27,8 +27,28 @@ window.addEventListener("load", function() {
     })
   
     $(function() {
-        $("#startdatepicker").datepicker();
-        $("#enddatepicker").datepicker();
+      var minDate = new Date();
+      var array = ['2020-02-01','2020-02-02', '2020-02-03', '2020-02-17', '2020-02-18']
+        $("#startdatepicker").datepicker({
+          minDate: minDate,
+          beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [ array.indexOf(string) == -1 ]
+          },
+          onClose: function(selectedDate) {
+            $("#enddatepicker").datepicker("option", "minDate", selectedDate)
+          }
+        });
+        $("#enddatepicker").datepicker({
+          minDate: minDate,
+          beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [ array.indexOf(string) == -1 ]
+          },
+          onClose: function(selectedDate) {
+            $("#startdatepicker").datepicker("option", "minDate", selectedDate)
+          }
+        });
     });
 
   })
