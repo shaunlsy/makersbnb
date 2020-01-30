@@ -6,6 +6,7 @@ $LOAD_PATH << './app/models'
 require 'sinatra'
 require 'pg'
 require 'json'
+require 'date'
 
 # Models
 require 'database_connection'
@@ -45,10 +46,12 @@ class MakersbnbApp < Sinatra::Base
     data_hash.to_json
   end
 
-  post '/listings' do
+  post '/listing' do
     Listing.create(list_name: params[:list_name], user_id: session[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
     redirect '/'
   end
+
+
 
   post '/sign-up' do
     session[:user_id] = User.create(params['username'], params['email'], params['password'])
@@ -63,10 +66,24 @@ class MakersbnbApp < Sinatra::Base
     redirect '/'
   end
 
+
   get '/myaccount' do
     @user = User.find(session[:user_id])
     @mylistings = Listing.my_listings(session[:user_id])
+    bookings = Booking.bookings(session[:user_id])
+    @my_bookings_pending = bookings.select{|booking| booking.confirmation == false}
+    @my_bookings_confirmed = bookings.select{|booking| booking.confirmation == true}
     erb :myaccount
+  end
+
+  put '/booking/:id' do
+    Booking.confirm(booking_id: params['id'])
+    'Booking Confirmed'
+  end
+
+  delete '/booking/:id' do
+    Booking.decline(booking_id: params['id'])
+    'Booking Declined'
   end
 
   post '/make-booking' do
@@ -81,6 +98,7 @@ class MakersbnbApp < Sinatra::Base
   get '/make-booking' do
     erb :booking_confirmation
   end
+
 
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
