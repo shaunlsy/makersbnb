@@ -28,12 +28,12 @@ window.addEventListener("load", function() {
       })
       $(`#extra${id}`).fadeToggle()
     })
-  
+
     var date_selector = function(blocked_dates, listing) {
       var minDate = new Date();
 
       var array = blocked_dates
-      
+
         $(`#startdatepicker${listing}`).datepicker({
           minDate: minDate,
           beforeShowDay: function(date){
@@ -42,6 +42,7 @@ window.addEventListener("load", function() {
           },
           onClose: function(selectedDate) {
             $(`#enddatepicker${listing}`).datepicker("option", "minDate", selectedDate)
+            $(`#enddatepicker${listing}`).datepicker("option", "maxDate", nextBookedDate(array, selectedDate))
           }
         });
         $(`#enddatepicker${listing}`).datepicker({
@@ -52,6 +53,21 @@ window.addEventListener("load", function() {
           }
         });
     };
+
+    var nextBookedDate = function(blockedDates, selectedDate) {
+      var selected = new Date(selectedDate)
+      var arr = blockedDates.map(function(i) { return new Date(i)});
+
+      console.log(arr)
+
+      var datesAbove = arr.filter(function(i) { return i >= selected })
+
+      console.log(datesAbove)
+
+      var maxDate = datesAbove[0]
+
+      return maxDate
+    }
 
   })
 })
