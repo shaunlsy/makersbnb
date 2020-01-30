@@ -40,7 +40,9 @@ class MakersbnbApp < Sinatra::Base
   end
 
   get '/listing/:id' do
-    Listing.listing_query(params['id']).to_json
+    data_hash = Listing.listing_query(params['id'])
+    data_hash['date_range'] = Booking.get_blocked_dates_range(listing_id: params['id'])
+    data_hash.to_json
   end
 
   post '/listings' do
