@@ -109,9 +109,12 @@
           </div>
           <div class='#extra-button'>
             <% if @user.logged_in %>
-              Start Date: <input type="text" id="startdatepicker">
-              End Date: <input type="text" id="enddatepicker">
-              <button class='btn' id='book-space'>Book Space!</button>
+            <form action="/make-booking" method="post">
+            <input type="hidden" name='listing_id' value='<%=listing.list_id%>'>
+              Start Date: <input type="text" name='start_date' id="startdatepicker">
+              End Date: <input type="text" name='end_date' id="enddatepicker">
+              <button class='btn' name='Book Space!' id='book-space'>Book Space!</button>
+              </form>
             <% end %>
           </div>
         </div>

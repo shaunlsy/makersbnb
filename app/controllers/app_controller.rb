@@ -68,6 +68,19 @@ class MakersbnbApp < Sinatra::Base
     erb :myaccount
   end
 
+  post '/make-booking' do
+    @user = session[:user_id]
+    session[:start_date] = params[:start_date]
+    session[:end_date] = params[:end_date]
+    session[:listing_id] = params[:listing_id]
+    Booking.create(listing_id: session[:listing_id] ,user_id: @user, start_date: session[:start_date], end_date: session[:end_date], confirmation: false)
+    redirect '/make-booking'
+  end
+
+  get '/make-booking' do
+    erb :booking_confirmation
+  end
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end

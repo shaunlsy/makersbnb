@@ -6,7 +6,7 @@ feature 'Create booking' do
     first('.listing > .listing-outline').click
     fill_in("start_date", with: "2020-01-27")
     fill_in("end_date", with: "2020-02-01")
-    expect(page).to have_content "Start date"
-    expect(page).to have_content "End date"
+    click_button "Book Space!"
+    expect(page).to have_content "Booking made. Waiting for confirmation."
   end
 end
