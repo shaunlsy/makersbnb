@@ -1,3 +1,4 @@
+require 'date'
 class Booking
 
   attr_reader :booking_id, :confirmation, :start_date, :end_date
@@ -25,4 +26,11 @@ class Booking
   def self.confirm(booking_id:)
     @dbconnection.command("UPDATE bookings SET confirmation = true WHERE booking_id = '#{booking_id}'")
   end
+
+  def self.get_blocked_dates_range(listing_id:)
+    dates = @dbconnection.command("SELECT start_date, end_date FROM bookings WHERE listing_id_fk='#{listing_id}'")
+    booked_dates = dates.map{|booking| (Date.parse(booking['start_date'])..Date.parse(booking['end_date'])).to_a.map{|date| date.to_s}}
+    booked_dates.flatten
+  end
+
 end
