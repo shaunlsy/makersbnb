@@ -3,6 +3,7 @@
   <meta carset=”utf-8>
   <title>Makersbnb</title>
 
+  <link rel="icon" href="/media/favicon.ico?" type="image/x-icon"></link>
   <link type="text/css" rel="stylesheet" href="css/myaccount-style.css"></link>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,9 +19,19 @@
         <div id='main-title'><strong>Makersbnb</strong></div>
 
         <% if @user.logged_in %>
-          <div id='user-logged-in'>My Account</div>
+          <div id='myaccount'>
+            My Account
+          </div>
+          <div class='add-listing'>
+            <h1> Insert Your Listing </h1>
+            <form action='/listings' method="post">
+              Listing name: <input type="text" name="list_name"><br>
+              Description: <input type="text" name="short_description"><br>
+              Price per night: <input type="text" name="price_per_night">
+              <input type='submit' value='Add listing'>
+            </form>
+          </div>
         <% end %>
-
       </div>
 
       <% if @user.logged_in %>
@@ -30,6 +41,7 @@
           <div class='dropdown-content'>
             <a class='dropdown-btn' href='/'>Homepage</a>
             <a class='dropdown-btn' href='/myaccount'>My Account</a>
+            <a class='dropdown-btn' id='create-listing'>Create Listing</a>
             <a class='dropdown-btn' href='/?logout=true'>Logout</a>
           </div>
         </div>
@@ -39,36 +51,86 @@
 
   <% if @user.logged_in %>
 
-    <section class='mylistings'>
-      <h2> My Listings </h2>
+    <section class='listing-container'>
+      <nav class='listing-navigation'>
+        <div>
+          <button class='navbtn' id='mylistingsbtn'>My Listings</button>
+          <button class='navbtn' id='mybookingsbtn'>My Bookings</button>
+          <button class='navbtn' id='mytripsbtn'>My Trips</button>
+        </div>
+      </nav>
 
-      <div class='display-listings'>
-        <% @mylistings.each_with_index do |listing, i| %>
+      <div class='mylistings' id='listings'>
+        <h2> My Listings </h2>
 
-          <div class='listing'>
-            <div class='listing-full' id='<%=listing.list_id%>'>
-              <div class="image">
-                <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
-              </div>
-              <div class="overview">
-                  <%= listing.list_name %> by <%= listing.username%><br>
-                  Description: <%= listing.short_description%>
-                  Price per night: £<%= listing.price_per_night%>
+        <div class='display-listings'>
+          <% @mylistings.each_with_index do |listing, i| %>
+
+            <div class='listing'>
+              <div class='listing-full' id='<%=listing.list_id%>'>
+                <div class="image">
+                  <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                </div>
+                <div class="overview">
+                    <%= listing.list_name %> by <%= listing.username%><br>
+                    Description: <%= listing.short_description%>
+                    Price per night: £<%= listing.price_per_night%>
+                </div>
               </div>
             </div>
-          </div>
 
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </section>
+
+      <div class='mylistings' id='bookings'>
+        <h2> My Bookings </h2>
+
+        <div id='bookings-confirmed'>
+          <h3> Confirmed Bookings</h3>
+          <div class='display-listings'>
+            test confirmed bookings
+          </div>
+        </div>
+        <div id='bookings-pending'>
+          <h3> Pending Bookings</h3>
+          <div class='display-listings'>
+            test pending bookings
+          </div>
+        </div>
+
+      </div>
+
+      <div class='mylistings' id='trips'>
+        <h2> My Trips </h2>
+
+        <div id='trips-confirmed'>
+          <h3> Confirmed Trips</h3>
+          <div class='display-listings'>
+            test confirmed trips
+          </div>
+        </div>
+        <div id='trips-pending'>
+          <h3> Pending Trips</h3>
+          <div class='display-listings'>
+            test pending trips
+          </div>
+        </div>
+
+      </div>
+
+  </section>
 
   <% else %>
     User not logged in
   <% end %>
 
   <footer class='footer'>
+    <br>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
+    <br>
   </footer>
 
   <script src="scripts/jsfrontend.js"></script>
+  <script src="scripts/jsMyAccount.js"></script>
 </body>

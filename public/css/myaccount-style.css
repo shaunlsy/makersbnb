@@ -20,6 +20,8 @@ body {
 
 .footer {
   background: #F7F7F7;
+  position: relative;
+  top: 0px;
 }
 
 .title {
@@ -36,17 +38,13 @@ body {
   padding-bottom: 20px
 }
 
-#user-logged-in {
+#myaccount {
   font-size: 200%;
   position: relative;
-  top: 0px;
-  left: 20px
-}
-
-#listing-button {
-  position: relative;
-  top: 10px;
+  top: 15px;
   left: 20px;
+  bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .add-listing {
@@ -59,7 +57,8 @@ body {
 
 .drop-down-container {
   position: relative;
-  top: 20px
+  top: 30px;
+  right: 30px;
   height: auto;
   width: auto;
   float: right;
@@ -80,6 +79,7 @@ body {
   display: none;
   position: absolute;
   min-width: 160px;
+  background: #F7F7F7;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -94,14 +94,12 @@ body {
 }
 
 .dropdown-btn:hover {
-  /* background-color: rgb(216, 212, 212); */
   background-color: rgb(56, 58, 61);
   border: 1pt thin black;
   color: white;
 }
 
 .dropbtn:hover {
-  /* background-color: rgb(216, 212, 212); */
   background-color: rgb(56, 58, 61);
   color: white;
 
@@ -110,6 +108,11 @@ body {
 .drop-down-container:hover .dropdown-content {
   display: block;
 }
+
+.drop-down-container:hover .dropbtn {
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+}
+
 
 /* ------------------------ */
 
@@ -141,9 +144,67 @@ body {
 .btn:hover {
   background: #eee;
 }
-.info {
-  color: dodgerblue;
+
+/* -------- LISTINGS CONTAINER --------- */
+
+.listing-container {
+  background: #F7F7F7;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  top: 0px;
 }
+
+.listing-navigation {
+  background: #F7F7F7;
+  width: 15%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.listing-navigation > div {
+  position: relative;
+}
+
+.mylistings {
+  background: white;
+  width: 85%;
+  height: auto;
+}
+
+#listings {
+  display: block;
+}
+
+#bookings {
+  display: none;
+}
+
+#trips {
+  display: none;
+}
+
+.navbtn {
+  width: 90%;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  top: 15px;
+}
+
+.navbtn:hover {
+  background-color: rgb(56, 58, 61);
+  border: 1pt thin black;
+  color: white;
+}
+
+/* ------------------------ */
+
+/* -------- LISTINGS OBJECTS --------- */
 
 .display-listings {
   display: flex;

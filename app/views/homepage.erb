@@ -3,6 +3,7 @@
   <meta carset=”utf-8>
   <title>Makersbnb</title>
 
+  <link rel="icon" href="/media/favicon.ico?" type="image/x-icon"></link>
   <link type="text/css" rel="stylesheet" href="css/homepage-style.css"></link>
   <meta name="viewport" content="width=device-width">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,9 +20,6 @@
 
       <% if @user.logged_in %>
         <div id='user-logged-in'> Welcome <%=@user.username%>
-        </div>
-        <div id='listing-button'>
-            <button class="btn" id="create-listing">Create a new listing!</button>
         </div>
         <div class='add-listing'>
           <h1> Insert Your Listing </h1>
@@ -40,8 +38,8 @@
       <div class='user-buttons'>
 
         <div class='log-in-buttons'>
-          <button id='newbutton' class="log-in-button">Log in</button>
-          <button class="sign-up-button">Register</button>
+          <button class="dropbtn" id='login-btn'>Log in</button>
+          <button class="dropbtn" id='register-btn'>Register</button>
         </div>
 
         <div class='log-in-forms' id="log-in">
@@ -71,6 +69,7 @@
         <div class='dropdown-content'>
           <a class='dropdown-btn' href='/'>Homepage</a>
           <a class='dropdown-btn' href='/myaccount'>My Account</a>
+          <a class='dropdown-btn' id='create-listing'>Create Listing</a>
           <a class='dropdown-btn' href='/?logout=true'>Logout</a>
         </div>
       </div>
@@ -113,7 +112,9 @@
 
 
   <footer class='footer'>
+    <br>
     Created by the Apocalypses team Asia, Chris, Shaun, & Vish.
+    <br>
   </footer>
   <script src="scripts/jsfrontend.js"></script>
 </body>
