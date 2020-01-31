@@ -27,4 +27,9 @@ class Message
     @dbconnection.command("INSERT INTO messages(receiver_id_fk, messenger_id_fk, message) VALUES('#{receiver_id}', '#{messenger_id}', '#{message}')")
   end
 
+  def self.get_message(user_1:  , user_2: )
+    messages = @dbconnection.command("SELECT message, messenger_id_fk, receiver_id_fk FROM messages WHERE receiver_id_fk = '#{user_1}' AND messenger_id_fk = '#{user_2}' OR receiver_id_fk = '#{user_2}' AND messenger_id_fk = '#{user_1}';")
+    messages.map { |message| {sender_id: message['messenger_id_fk'], receiver_id: message['receiver_id_fk'], message: message['message']} }
+  end
+
 end
