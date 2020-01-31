@@ -29,11 +29,15 @@ describe Message do
   describe '.get_messages' do
     it 'gets all the messages between two users' do
       subject.create(receiver_id: @user_2, messenger_id: @user_1, message: "Hi, User 2")
-      expect(subject.get_message(user_1: @user_1, user_2: @user_2)).to eq [{sender_id: @user_2, receiver_id: @user_1, message: 'hello user 1'}, {sender_id: @user_1, receiver_id: @user_2, message: 'Hi, User 2' }]
-
+      array = subject.get_message(user_1: @user_1, user_2: @user_2)
+      p array
+      expect(array[0][:sender_id]).to eq @user_2
+      expect(array[0][:receiver_id]).to eq @user_1
+      expect(array[0][:message]).to eq 'hello user 1'
+      expect(array[-1][:sender_id]).to eq @user_1
+      expect(array[-1][:receiver_id]).to eq @user_2
+      expect(array[-1][:message]).to eq 'Hi, User 2'
     end
   end
-
-
 
 end

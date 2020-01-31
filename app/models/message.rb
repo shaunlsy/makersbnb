@@ -28,8 +28,8 @@ class Message
   end
 
   def self.get_message(user_1:  , user_2: )
-    messages = @dbconnection.command("SELECT message, messenger_id_fk, receiver_id_fk FROM messages WHERE receiver_id_fk = '#{user_1}' AND messenger_id_fk = '#{user_2}' OR receiver_id_fk = '#{user_2}' AND messenger_id_fk = '#{user_1}';")
-    messages.map { |message| {sender_id: message['messenger_id_fk'], receiver_id: message['receiver_id_fk'], message: message['message']} }
+    messages = @dbconnection.command("SELECT message, messenger_id_fk, receiver_id_fk, time_inserted FROM messages WHERE receiver_id_fk = '#{user_1}' AND messenger_id_fk = '#{user_2}' OR receiver_id_fk = '#{user_2}' AND messenger_id_fk = '#{user_1}';")
+    messages.map { |message| {sender_id: message['messenger_id_fk'], receiver_id: message['receiver_id_fk'], message: message['message'], time_inserted: message['time_inserted']} }
   end
 
 end
