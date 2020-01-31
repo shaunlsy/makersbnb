@@ -103,13 +103,14 @@
             <div class='listing'>
               <div class='listing-full' id='<%=listing.list_id%>'>
                 <div class="image">
-                  <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                  <img src="media/<%=listing.img_ref%>.jpg" width=250px height=200px class="cover">
                 </div>
                 <div class="overview">
                     <%= listing.list_name %> by <%= listing.username%><br>
                     Description: <%= listing.short_description%>
                     Price per night: £<%= listing.price_per_night%>
                 </div>
+                
               </div>
             </div>
 
@@ -129,7 +130,7 @@
                 <div class='listing'>
                   <div class='listing-full' id='<%=booking.booking_id%>'>
                     <div class="image">
-                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                      <img src="media/<%=booking.img_ref%>.jpg" width=250px height=200px class="cover">
                     </div>
 
                     <div class="overview">
@@ -175,7 +176,7 @@
                 <div class='listing'>
                   <div class='listing-full' id='<%=booking.booking_id%>'>
                     <div class="image">
-                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                      <img src="media/<%=booking.img_ref%>.jpg" width=250px height=200px class="cover">
                     </div>
 
                     <div class="overview">
@@ -189,11 +190,22 @@
                       Total price: £<%= booking.total_price%>
                     </div>
 
-                    <div class='confirm-btn'>
-                      <button class='btn' id='accept-booking' value='<%=booking.booking_id%>'>Accept Booking</button>
-                      <button class='btn' id='decline-booking' value='<%=booking.booking_id%>'>Decline Booking</button>
+                    <div class='messaging-btn'>
+                      <button class='messaging-btn' id='messaging<%= booking.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Messaging</button>
+                    </div>
+
+                  </div>
+
+                  <div class='chat-container'>
+                    <div class='chat' id='chat<%=booking.booking_id%>'>
+                      <div class='chatbox' id="chatbox<%=booking.booking_id%>"></div>
+                      <textarea class='add-message' id='add-message<%=booking.booking_id%>'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Add Message</button>
+                      <button class='close-messaging-btn' id='<%= booking.booking_id%>'>Close Messaging</button>
+                      </div>
                     </div>
                   </div>
+
                 </div>
 
               <% end %>
@@ -215,7 +227,7 @@
                 <div class='listing'>
                   <div class='listing-full' id='<%=trips.booking_id%>'>
                     <div class="image">
-                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                      <img src="media/<%=trips.img_ref%>.jpg" width=250px height=200px class="cover">
                     </div>
 
                     <div class="overview">
@@ -228,8 +240,23 @@
                       Number of nights: <%= trips.nights%><br>
                       Total price: £<%= trips.total_price%>
                     </div>
+                    
+                    <div class='messaging-btn'>
+                      <button class='messaging-btn' id='messaging<%= trip.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Messaging</button>
+                    </div>
 
                   </div>
+
+                  <div class='chat-container'>
+                    <div class='chat' id='chat<%=trip.booking_id%>'>
+                      <div class='chatbox' id="chatbox<%=trip.booking_id%>"></div>
+                      <textarea class='add-message' id='add-message<%=trip.booking_id%>'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Add Message</button>
+                      <button class='close-messaging-btn' id='<%= trip.booking_id%>'>Close Messaging</button>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
               <% end %>
@@ -247,7 +274,7 @@
                 <div class='listing'>
                   <div class='listing-full' id='<%=trip.booking_id%>'>
                     <div class="image">
-                      <img src="media/cool_house<%=i%>.jpg" width=250px height=200px class="cover">
+                      <img src="media/<%=trips.img_ref%>.jpg" width=250px height=200px class="cover">
                     </div>
 
                     <div class="overview">
@@ -261,8 +288,24 @@
                       Total price: £<%= trip.total_price%>
                     </div>
 
+                    <div class='messaging-btn'>
+                      <button class='messaging-btn' id='messaging<%= trip.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Messaging</button>
+                    </div>
+
                   </div>
+
+                  <div class='chat-container'>
+                    <div class='chat' id='chat<%=trip.booking_id%>'>
+                      <div class='chatbox' id="chatbox<%=trip.booking_id%>"></div>
+                      <textarea class='add-message' id='add-message<%=trip.booking_id%>'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Add Message</button>
+                      <button class='close-messaging-btn' id='<%= trip.booking_id%>'>Close Messaging</button>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+
 
               <% end %>
             </div>
