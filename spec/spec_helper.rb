@@ -35,20 +35,22 @@ RSpec.configure do |config|
     # add test user
     user_id = con.exec("INSERT INTO users(username, email, password) VALUES('test-username', 'test-email', '#{Digest::SHA256.hexdigest('password')}') RETURNING user_id;")
     user_id = user_id[0]['user_id']
+    user_id_2 = con.exec("INSERT INTO users(username) VALUES('test-username-2') RETURNING user_id;")
+    user_id_2 = user_id_2[0]['user_id']
     # add test listing
     listing_id = con.exec("INSERT INTO listings(list_name, user_id_fk, short_description, price_per_night) VALUES('Test listing 1', '#{user_id}', 'im a description', '100') RETURNING listing_id;")
     listing_id = listing_id[0]['listing_id']
-    # add test messages
-
     # add test comments
     con.exec("INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('#{listing_id}','#{user_id}','2020-01-02','2020-01-05','TRUE');")
     con.exec("INSERT INTO bookings(listing_id_fk, user_id_fk, start_date, end_date, confirmation) VALUES('#{listing_id}','#{user_id}','2020-02-02','2020-02-05','FALSE');")
+    # add test message
+    con.exec("INSERT INTO messages(receiver_id_fk, messenger_id_fk, message) VALUES('#{user_id}', '#{user_id_2}', 'hello user 1');")
   end
 
   config.after(:each) do
     con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
     # wipe database after test
-    con.exec("TRUNCATE users, listings, bookings;")
+    con.exec("TRUNCATE users, listings, bookings, messages;")
   end
 
   # Use color not only in STDOUT but also in pagers and files

@@ -39,5 +39,14 @@ window.addEventListener("load", function() {
       $(`#${booking_id}`).fadeToggle()
     })
 
+    $.('.messaging').click(function(){
+      $
+    })
+
+    var updateChat = function() {
+      var user_1_id = 
+      setInterval($.ajax({url: `messages/${}`}))
+    }
+
   })
 })

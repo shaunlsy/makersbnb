@@ -25,3 +25,13 @@ CREATE TABLE bookings
   end_date DATE,
   confirmation BOOLEAN
 );
+
+
+CREATE TABLE messages
+(
+  message_id SERIAL PRIMARY KEY,
+  receiver_id_fk INTEGER REFERENCES users(user_id),
+  messenger_id_fk INTEGER REFERENCES users(user_id),
+  message VARCHAR,
+  time_inserted TIMESTAMP DEFAULT current_timestamp
+)

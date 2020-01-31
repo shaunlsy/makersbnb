@@ -13,6 +13,7 @@ require 'database_connection'
 require 'listing'
 require 'user'
 require 'booking'
+require 'message'
 
 
 
@@ -26,6 +27,7 @@ class MakersbnbApp < Sinatra::Base
   Listing.setup(DatabaseConnection)
   User.setup(DatabaseConnection)
   Booking.setup(DatabaseConnection)
+  Message.setup(DatabaseConnection)
 
   enable :sessions
 
@@ -109,6 +111,9 @@ class MakersbnbApp < Sinatra::Base
     erb :booking_confirmation
   end
 
+  get '/message/:user_1_id/:user_2_id' do
+    Message.get_message(user_1: params[:user_1_id], user_2: params[:user_2_id]).to_json
+  end
 
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
