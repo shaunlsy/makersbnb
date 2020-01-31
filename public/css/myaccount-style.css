@@ -287,3 +287,58 @@ body {
   float: right;
   width: 20%;
 }
+
+/* -------- CHAT --------- */
+
+
+.chat-container {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.chat {
+  position: relative;
+  display: none;
+}
+
+.messaging-btn {
+  position: relative;
+  float: right;
+}
+
+.close-messaging-btn {
+  position: relative;
+  float: right;
+  display: none;
+}
+
+.chatbox {
+  position: relative;
+  width: 100%;
+  overflow: scroll;
+  height: 200px;
+}
+
+.add-message {
+  position: relative;
+  float: left;
+  min-height: 50px;
+  width: 50%
+}
+
+.send-message {
+  position: relative;
+  float: left;
+  height: 50px;
+  width: 50px;
+
+}
+
+.message-time {
+  font-size: 40%;
+}
+
+.message-body {
+  font-size: 70%;
+}
