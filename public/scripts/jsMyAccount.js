@@ -39,14 +39,41 @@ window.addEventListener("load", function() {
       $(`#${booking_id}`).fadeToggle()
     })
 
-    $.('.messaging').click(function(){
-      $
+    $('.messaging').click(function(){
+      var user_1 = $(this).attr('data_user_1')
+      var user_2 = $(this).attr('data_user_2')
+      var booking_id = $(this).attr('data_booking_id')
+      console.log(user_1)
+      console.log(user_2)
+      updateChat(user_1, user_2, booking_id)
     })
-
-    var updateChat = function() {
-      var user_1_id = 
-      setInterval($.ajax({url: `messages/${}`}))
-    }
+    
+    var updateChat = function(user_1, user_2, booking_id) {
+      
+      $.get(`message/${user_1}/${user_2}`, function(data) {
+        var jsonData = JSON.parse(data)
+        jsonData.forEach(function(message){
+          var style = function() {
+            if (message['sender_id'] == user_1) {
+              'float: right;background: white;'
+              }
+            else {
+              'float: left;background: blue;'
+            }
+          }
+          $(`#chatbox${booking_id}`).append(
+              `
+              <div class='message' style='${style}' >
+                <div class='message_body'>
+                ${message['message']}
+                </div>
+              </div>
+              `
+            )
+        })
+      })
+        
+    } 
 
   })
 })

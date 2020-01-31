@@ -143,9 +143,9 @@
                       Total price: £<%= booking.total_price%>
                     </div>
 
-                    <button class='messaging' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Messaging</button>
+                    <button class='messaging' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id= '<%= booking.booking_id%>'>Messaging</button>
                     <div class='chat'>
-                      <div class='chatbox'></div>
+                      <div class='chatbox' id="chatbox<%=booking.booking_id%>"></div>
                       <div class='add-message'></div>
                     </div>
                   </div>
