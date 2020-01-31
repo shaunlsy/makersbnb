@@ -55,15 +55,15 @@ window.addEventListener("load", function() {
         jsonData.forEach(function(message){
           var style = function() {
             if (message['sender_id'] == user_1) {
-              'float: right;background: white;'
+              return 'float: right;background: white;'
               }
             else {
-              'float: left;background: blue;'
+              return 'float: left;background: blue;'
             }
           }
           $(`#chatbox${booking_id}`).append(
               `
-              <div class='message' style='${style}' >
+              <div class='message' style='${style()}' >
                 <div class='message_body'>
                 ${message['message']}
                 </div>
