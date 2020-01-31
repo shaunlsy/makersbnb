@@ -35,8 +35,7 @@ class Booking
 
   def self.bookings(id)
     bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, b.user_id_fk, u.username, l.list_name, l.price_per_night FROM bookings b JOIN users u ON (b.user_id_fk=u.user_id) JOIN listings l ON (b.listing_id_fk=l.listing_id) WHERE b.listing_id_fk IN (SELECT listing_id FROM listings WHERE user_id_fk='#{id}');")
-
-    bookings == nil ? [] : self.create_booking_instance(bookings)
+    self.create_booking_instance(bookings)
   end
 
   def self.get_blocked_dates_range(listing_id:)
@@ -47,17 +46,18 @@ class Booking
 
   def self.trips(id)
     bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, b.user_id_fk, u.username, l.list_name, l.price_per_night FROM bookings b JOIN listings l ON (b.listing_id_fk=l.listing_id) JOIN users u ON (l.user_id_fk=u.user_id) WHERE b.user_id_fk='#{id}';")
-
-    bookings == nil ? [] : self.create_booking_instance(bookings)
+    self.create_booking_instance(bookings)
   end
 
   private
 
   def self.create_booking_instance(bookings)
+    return [] unless bookings
     bookings.map{ |booking|
       nights = number_of_nights(booking['start_date'], booking['end_date'])
       total = nights * booking['price_per_night'].to_i
-      self.new(booking['booking_id'], booking['confirmation'], booking['start_date'], booking['end_date'], booking['list_name'], booking['username'], booking['price_per_night'], nights , total, booking['user_id_fk'])}
+      self.new(booking['booking_id'], booking['confirmation'], booking['start_date'], booking['end_date'], booking['list_name'], booking['username'], booking['price_per_night'], nights , total, booking['user_id_fk'])
+    }
   end
 
   def self.number_of_nights(start_d, end_d)

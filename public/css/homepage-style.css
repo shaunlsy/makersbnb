@@ -26,6 +26,8 @@ body {
   background: rgba(247, 247, 247, 0.7);
   position: relative;
   top: 0px;
+  left: 40px;
+  color: white;
 }
 
 .title {
@@ -59,6 +61,11 @@ body {
   display: none;
   position: relative;
   left: 20px;
+}
+
+#user-action{
+  position: relative;
+  right: 40px;
 }
 
 /* -------- DROP DOWN LIST --------- */
@@ -160,7 +167,7 @@ body {
 .display-listings {
   display: flex;
   flex-wrap: nowrap;
-  
+
   flex-direction: column;
   text-align: center;
   padding: 10px 20px;
@@ -188,7 +195,7 @@ body {
 
 .extra {
   display: none;
-  
+
 }
 
 .flex-container {

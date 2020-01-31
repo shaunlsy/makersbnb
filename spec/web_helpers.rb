@@ -1,10 +1,9 @@
 def login
   visit '/'
-  click_button('Register')
-  fill_in("username", with: 'User')
-  fill_in("email", with: 'user@test.com')
-  fill_in("password", with: 'password')
-  click_button 'Sign up'
+  click_button('Log in')
+  fill_in("log_in_email", with: 'test-email')
+  fill_in("log_in_password", with: 'password')
+  click_button 'log in'
 end
 
 def add_listing
@@ -14,4 +13,11 @@ def add_listing
   fill_in("short_description", with: "My house is superb!")
   fill_in("price_per_night", with: "150")
   click_button "Add listing"
+end
+
+def book_space
+  first('.listing > .listing-outline').click
+  fill_in("start_date", with: "2020-01-27")
+  fill_in("end_date", with: "2020-02-01")
+  click_button "Book Space!"
 end

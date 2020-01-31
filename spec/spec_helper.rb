@@ -23,6 +23,7 @@ require 'capybara/poltergeist'
 
 Capybara.javascript_driver = :selenium
 Capybara.server = :puma, { Silent: true }
+
 Capybara.app = MakersbnbApp
 
 
@@ -31,8 +32,8 @@ RSpec.configure do |config|
   config.before(:each) do
 
     con = PG.connect(:dbname => 'makersbnb-test', :user => ENV['USER'])
-    # add test users
-    user_id = con.exec("INSERT INTO users(username) VALUES('test-username') RETURNING user_id;")
+    # add test user
+    user_id = con.exec("INSERT INTO users(username, email, password) VALUES('test-username', 'test-email', '#{Digest::SHA256.hexdigest('password')}') RETURNING user_id;")
     user_id = user_id[0]['user_id']
     user_id_2 = con.exec("INSERT INTO users(username) VALUES('test-username-2') RETURNING user_id;")
     user_id_2 = user_id_2[0]['user_id']
