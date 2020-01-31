@@ -46,6 +46,15 @@ window.addEventListener("load", function() {
             $(`#${booking_id}`).fadeToggle()
         })
 
+        $('.send-message').click(function(){
+          var user_1 = $(this).attr('data_user_1')
+          var user_2 = $(this).attr('data_user_2')
+          var booking_id = $(this).attr('data_booking_id')
+          var text = $(`#add-message${booking_id}`).val()
+          var data = {'user_1': user_1, 'user_2': user_2, 'message': text}
+          $.post('/message', JSON.stringify(data))
+        })
+
     $('.messaging-btn').click(function(){
       var user_1 = $(this).attr('data_user_1')
       var user_2 = $(this).attr('data_user_2')

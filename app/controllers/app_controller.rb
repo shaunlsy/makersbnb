@@ -115,6 +115,11 @@ class MakersbnbApp < Sinatra::Base
     Message.get_message(user_1: params[:user_1_id], user_2: params[:user_2_id]).to_json
   end
 
+  post '/message' do
+    hash = JSON.parse(request.body.read)
+    Message.create(receiver_id: hash['user_2'], messenger_id: hash['user_1'], message: hash['message'])
+  end
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end

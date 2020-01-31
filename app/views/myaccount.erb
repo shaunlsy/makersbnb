@@ -153,8 +153,8 @@
                   <div class='chat-container'>
                     <div class='chat' id='chat<%=booking.booking_id%>'>
                       <div class='chatbox' id="chatbox<%=booking.booking_id%>"></div>
-                      <textarea class='add-message'></textarea>
-                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Add Message</div>
+                      <textarea class='add-message' id='add-message<%=booking.booking_id%>'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Add Message</div>
                     </div>
                   </div>
 
