@@ -49,9 +49,16 @@ class MakersbnbApp < Sinatra::Base
   post '/listing' do
     img_ref = Listing.create(list_name: params[:list_name], user_id: session[:user_id], short_description: params[:short_description], price_per_night: params[:price_per_night])
 
-    File.open("./public/media/#{img_ref}.jpg", 'wb') do |f|
-      f.write(params['datafile'][:tempfile].read)
+    begin
+      img = params['datafile'][:tempfile]
+      File.open("./public/media/#{img_ref}.jpg", 'wb') do |f|
+        f.write(img.read)
+      end
+    rescue
+      puts 'No image added'
+      Listing.default_image(img_ref)
     end
+
     redirect '/'
   end
 
@@ -76,10 +83,8 @@ class MakersbnbApp < Sinatra::Base
       @my_bookings_pending = bookings.select{|booking| booking.confirmation == false}
       @my_bookings_confirmed = bookings.select{|booking| booking.confirmation == true}
       trips = Booking.trips(session[:user_id])
-
       @my_trips_pending = trips.select{|trip| trip.confirmation == false}
-
-      p @my_trips_confirmed = trips.select{|trip| trip.confirmation == true}
+      @my_trips_confirmed = trips.select{|trip| trip.confirmation == true}
     end
     erb :myaccount
   end

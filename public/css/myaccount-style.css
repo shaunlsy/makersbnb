@@ -24,7 +24,13 @@ body {
 .footer {
   position: relative;
   top: 0px;
+  left: 40px;
   color: white;
+}
+
+.page-error{
+  position: relative;
+  left: 40px;
 }
 
 .title {
@@ -105,7 +111,6 @@ body {
 .dropbtn:hover {
   background-color: rgb(56, 58, 61);
   color: white;
-
 }
 
 .drop-down-container:hover .dropdown-content {
@@ -119,21 +124,34 @@ body {
 
 /* ------------------------ */
 
+/* -------- LOGIN & SIGNUP --------- */
+
+.user-buttons {
+  width: 65%;
+  height: auto;
+  float: right;
+  text-align: right;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+
+}
+
+.log-in-buttons {
+  position: relative;
+  top: 20px;
+  right: 10px;
+  float: right;
+}
+
 .log-in-forms {
   position: relative;
+
   top: 20px;
 }
 
 #log-in, #sign-up {
   display: none;
-}
-
-.log-in-button, .sign-up-button {
-  border: none;
-  background-color: inherit;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .btn {
@@ -145,8 +163,14 @@ body {
   display: inline-block;
 }
 .btn:hover {
-  background: #eee;
+  background-color: rgb(56, 58, 61);
+  color: white;
 }
+
+
+
+
+
 
 /* -------- LISTINGS CONTAINER --------- */
 
@@ -213,7 +237,7 @@ body {
 .display-listings {
   display: flex;
   flex-wrap: nowrap;
-  
+
   flex-direction: column;
   text-align: center;
   padding: 10px 20px;

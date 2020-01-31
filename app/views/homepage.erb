@@ -44,11 +44,13 @@
 
         <div class='log-in-buttons'>
           <button class="dropbtn" id='login-btn'>Log in</button>
-          <button class="dropbtn" id='register-btn'>Register</button>
+          <button class="dropbtn" id='register-btn'>Register</button><br>
+          <div id='user-action'>
+            <%= @log_in_action %>
+          </div>
         </div>
 
         <div class='log-in-forms' id="log-in">
-          <%= @log_in_action %>
           <form action='/log-in' method="post">
             Email: <input type="text" name="log_in_email" placeholder="Email" required>
             Password: <input type="password" name="log_in_password" minlength="8" required>
