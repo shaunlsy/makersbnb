@@ -1,5 +1,3 @@
-"use strict"
-
 window.addEventListener("load", function() {
     $(document).ready(function() {
 
@@ -10,9 +8,10 @@ window.addEventListener("load", function() {
         })
 
         $("#mybookingsbtn").click(function() {
-            $("#listings").css('display', 'none');
-            $("#trips").css('display', 'none');
-            $("#bookings").css('display', 'block');
+          $("#listings").css('display', 'none');
+          $("#trips").css('display', 'none');
+          $("#bookings").css('display', 'block');
+          console.log(test)
         })
 
         $("#mytripsbtn").click(function() {
@@ -47,12 +46,43 @@ window.addEventListener("load", function() {
             $(`#${booking_id}`).fadeToggle()
         })
 
-        $('.messaging').click(function() {
-            var user_1 = $(this).attr('data_user_1')
-            var user_2 = $(this).attr('data_user_2')
-            var booking_id = $(this).attr('data_booking_id')
-            updateChat(user_1, user_2, booking_id)
+    $('.messaging-btn').click(function(){
+      var user_1 = $(this).attr('data_user_1')
+      var user_2 = $(this).attr('data_user_2')
+      var booking_id = $(this).attr('data_booking_id')
+      console.log(user_1)
+      console.log(user_2)
+      $(this).hide()
+      // $(`#close-messaging${booking_id}`).show()
+      $(`#chat${booking_id}`).fadeToggle()
+      updateChat(user_1, user_2, booking_id)
+    })
+
+    var updateChat = function(user_1, user_2, booking_id) {
+      $.get(`message/${user_1}/${user_2}`, function(data) {
+        var jsonData = JSON.parse(data)
+        jsonData.forEach(function(message){
+          var style = function() {
+            if (message['sender_id'] == user_1) {
+              return 'float:right;background: white;'
+              }
+            else {
+              return 'float:left;background: blue;'
+            }
+          }
+          $(`#chatbox${booking_id}`).append(
+              `
+              <div class='message' style='${style()}' >
+                <div class='message_body'>
+                ${message['message']}
+                </div>
+              </div>
+              `
+            )
         })
+      })
+
+    }
 
         var updateChat = function(user_1, user_2, booking_id) {
 
