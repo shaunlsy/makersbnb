@@ -2,24 +2,25 @@
 
 body {
   font-family: 'Exo 2', sans-serif;
+  box-sizing: border-box;
   height: 100%;
   margin: 0;
-  padding: 10px 20px;
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  background-image: url("https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
 }
 
 .header {
-  padding: 10px 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  min-height: 810px;
+  width: 100%;
+  padding: 10px 2px;
   background: rgba(247, 247, 247, 0);
   position: relative;
   top: 0px;
-  height: auto;
+  background-image: url("https://images.pexels.com/photos/237272/pexels-photo-237272.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 }
 
 .footer {
@@ -42,6 +43,13 @@ body {
   top: 20px;
   left: 20px;
   padding-bottom: 20px
+}
+
+#explore {
+  font-size: 170%;
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-bottom: 20px;
 }
 
 #user-logged-in {
@@ -177,14 +185,17 @@ body {
 
 .listing {
   margin: 10px;
-  background-color: rgb(255, 255, 255, 0.9);
+  background-color: rgba(248, 248, 248, 0);
   text-align: left;
   line-height: 75px;
   font-size: 30px;
   padding: 10px 20px;
-  border-radius: 25px;
+  border-radius: 10px;
   color: black;
-  border: 2px solid rgb(black)
+  border: 2px solid rgb(black);
+  border: 0px solid;
+  padding: 10px;
+  box-shadow: 0px 5px 5px 5px #888888;
 }
 
 .listing-outline {
@@ -206,7 +217,7 @@ body {
   justify-content: space-between;
   background: rgb(56, 58, 61);
   color: white;
-  border-radius: 25px;
+  border-radius: 20px;
 }
 
 #book-space {
