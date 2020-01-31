@@ -102,6 +102,10 @@ class MakersbnbApp < Sinatra::Base
     erb :booking_confirmation
   end
 
+  get '/message/:user_1_id/:user_2_id' do
+    Message.get_message(user_1: params[:user_1_id], user_2: params[:user_2_id]).to_json
+  end
+
   # start the server if ruby file executed directly
   run! if $0 == __FILE__
 end

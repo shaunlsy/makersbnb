@@ -2,9 +2,10 @@ require 'digest'
 
 class User
 
-  attr_reader :email, :username, :logged_in
+  attr_reader :email, :username, :logged_in, :user_id
 
-  def initialize(username = nil, email = nil)
+  def initialize(user_id, username = nil, email = nil)
+    @user_id = user_id
     @username = username
     @email = email
     @logged_in = (username ? true : false)
@@ -35,10 +36,10 @@ class User
 
   def self.find(user_id)
     if user_id == nil
-      return self.new()
+      return self.new(nil)
     end
     user_data = @dbconnection.command("SELECT username, email FROM users WHERE user_id='#{user_id}';")[0]
-    self.new(user_data['username'], user_data['email'])
+    self.new(user_id, user_data['username'], user_data['email'])
   end
 
 end
