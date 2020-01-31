@@ -55,15 +55,20 @@ window.addEventListener("load", function() {
           $.post('/message', JSON.stringify(data))
         })
 
+        $('.close-messaging-btn').click(function(){
+          var booking_id = $(this).attr('id')
+          $(`#chat${booking_id}`).hide()
+          $('.messaging-btn').show()
+        })
+
     $('.messaging-btn').click(function(){
+
       var user_1 = $(this).attr('data_user_1')
       var user_2 = $(this).attr('data_user_2')
       var booking_id = $(this).attr('data_booking_id')
-      console.log(user_1)
-      console.log(user_2)
       $(this).hide()
-      // $(`#close-messaging${booking_id}`).show()
       $(`#chat${booking_id}`).fadeToggle()
+      $(`#chatbox${booking_id}`).empty()
       updateChat(user_1, user_2, booking_id)
     })
 

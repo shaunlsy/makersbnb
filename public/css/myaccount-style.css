@@ -301,9 +301,6 @@ body {
 }
 
 .close-messaging-btn {
-  position: relative;
-  float: right;
-  display: none;
 }
 
 .chatbox {
