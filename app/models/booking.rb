@@ -35,7 +35,7 @@ class Booking
 
 
   def self.bookings(id)
-    bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, b.user_id_fk, u.username, l.list_name, l.price_per_night l.img_ref FROM bookings b JOIN users u ON (b.user_id_fk=u.user_id) JOIN listings l ON (b.listing_id_fk=l.listing_id) WHERE b.listing_id_fk IN (SELECT listing_id FROM listings WHERE user_id_fk='#{id}');")
+    bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, b.user_id_fk, u.username, l.list_name, l.price_per_night, l.img_ref FROM bookings b JOIN users u ON (b.user_id_fk=u.user_id) JOIN listings l ON (b.listing_id_fk=l.listing_id) WHERE b.listing_id_fk IN (SELECT listing_id FROM listings WHERE user_id_fk='#{id}');")
     self.create_booking_instance(bookings)
   end
 
@@ -46,7 +46,7 @@ class Booking
   end
 
   def self.trips(id)
-    bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, b.user_id_fk, u.username, l.list_name, l.price_per_night l.img_ref FROM bookings b JOIN listings l ON (b.listing_id_fk=l.listing_id) JOIN users u ON (l.user_id_fk=u.user_id) WHERE b.user_id_fk='#{id}';")
+    bookings = @dbconnection.command("SELECT b.booking_id,  b.start_date, b.end_date, b.confirmation, l.user_id_fk, u.username, l.list_name, l.price_per_night, l.img_ref FROM bookings b JOIN listings l ON (b.listing_id_fk=l.listing_id) JOIN users u ON (l.user_id_fk=u.user_id) WHERE b.user_id_fk='#{id}';")
     self.create_booking_instance(bookings)
   end
 

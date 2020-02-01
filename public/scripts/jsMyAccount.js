@@ -55,6 +55,7 @@ window.addEventListener("load", function() {
           $.post('/message', JSON.stringify(data))
           updateChat(user_1, user_2, booking_id)
           updateChat(user_1, user_2, booking_id)
+          $(`#add-message${booking_id}`).val('')
         })
 
         $('.close-messaging-btn').click(function(){
@@ -63,7 +64,7 @@ window.addEventListener("load", function() {
           $('.messaging-btn').show()
         })
 
-        
+
 
     $('.messaging-btn').click(function(){
       window.user_1 = $(this).attr('data_user_1')
@@ -71,13 +72,13 @@ window.addEventListener("load", function() {
       window.booking_id = $(this).attr('data_booking_id')
       $(this).hide()
       $(`#chat${booking_id}`).fadeToggle()
-      $(`#chatbox${booking_id}`).empty()      
+      $(`#chatbox${booking_id}`).empty()
 
       var length = updateChat(user_1, user_2, booking_id)
     })
-        
-    
-    
+
+
+
     var updateChat = function(user_1, user_2, booking_id) {
             var length = $.get(`message/${user_1}/${user_2}`, function(data) {
                 var jsonData = JSON.parse(data)
@@ -107,10 +108,10 @@ window.addEventListener("load", function() {
                 return length
             })
             return length
- 
-        } 
 
-        
+        }
+
+
 
     })
   })
@@ -123,7 +124,7 @@ window.addEventListener("load", function() {
   //   setInterval(function(user_1, user_2, booking_id, length) {
 
   //     $.get(`message/${user_1}/${user_2}`, function(data) {
-        
+
   //       var jsonData = JSON.parse(data)
   //       var newLength = jsonData.length
   //       var difference = newLength - length
