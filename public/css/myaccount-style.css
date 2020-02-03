@@ -284,70 +284,82 @@ body {
 /* -------- CHAT --------- */
 
 
-.chat-container {
+/* .chat-container {
   position: relative;
-  display: flex;
-  flex-wrap: nowrap;
   width: 100%;
-}
+  height: auto;
+} */
 
 .chat {
   position: relative;
   display: none;
   width: 100%;
+  height: auto;
 }
 
 .messaging-btn {
   position: relative;
   float: right;
+  width: 20%;
 }
 
 .close-messaging-btn {
   position: relative;
   float: right;
+  width: 20%;
 }
 
 .chatbox {
   position: relative;
   width: 100%;
   overflow: scroll;
-  min-height: 250px;
+  height: 250px;
 }
 
 .add-message {
   position: relative;
   float: left;
-  min-height: 50px;
-  width: 50%
+  height: 50px;
+  width: 50%;
 }
 
 .send-message {
   position: relative;
   float: left;
   height: 50px;
-  width: 50px;
+  width: 20%;
 }
 
 .message-time {
   position: relative;
   font-size: 15px;
+  width: 100%;
+  text-align: inherit;
 }
 
 .message-body {
   position: relative;
-  width: 50%;
+  width: 100%;
+  font-size: 30px;
+  text-align: inherit;
 }
 
 .user-1-message {
   background-color: white;
   float: right;
-  font-align: right;
+  text-align: right;
   font-size: 20px;
+  line-width: 20px;
+  width: 70%;
+  border: thin black;
 }
 
 .user-2-message {
   background-color: #54C7FC;
   float: left;
-  font-align: left;
+  text-align: left;
   font-size: 20px;
+  line-width: 20px;
+  width: 70%;
+  border: thin black;
 }

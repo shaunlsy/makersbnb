@@ -124,11 +124,11 @@ var startChat = function() {
         var messageClass = (message['sender_id'] == user_1 ? 'user-1-message' : 'user-2-message')
         var dateStr = (new Date(message['time_inserted'])).toUTCString()
         chatbox.innerHTML += (
-          `<div class='message_time' style=''>
-            ${dateStr}
-          </div>
-          <div class='${messageClass}'>
-            <div class='message_body'>
+          `<div class='${messageClass}'>
+            <div class='message-time' style=''>
+              ${dateStr}
+            </div>
+            <div class='message-body'>
             ${message['message']}
             </div>
           </div>`

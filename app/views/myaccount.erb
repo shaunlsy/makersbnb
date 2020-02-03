@@ -13,75 +13,75 @@
 </head>
 
 <body>
-    <header class='header'>
+  <header class='header'>
 
-      <div class='title'>
-        <div id='main-title'><strong>Makersbnb</strong></div>
-
-        <% if @user.logged_in %>
-          <div id='myaccount'>
-            My Account
-          </div>
-          <div class='add-listing'>
-            <h1> Insert Your Listing </h1>
-            <form action='/listing' method="post" enctype="multipart/form-data">
-              Listing name: <input type="text" name="list_name" required><br>
-              Description: <input type="text" name="short_description" required><br>
-              Price per night: <input type="text" name="price_per_night" required><br>
-              Add image: <input type="file" name="datafile">
-              <input type='submit' value='Add listing'>
-            </form>
-            </form>
-          </div>
-        <% end %>
-      </div>
+    <div class='title'>
+      <div id='main-title'><strong>Makersbnb</strong></div>
 
       <% if @user.logged_in %>
-
-        <div class='drop-down-container'>
-          <button class='dropbtn' id='userbutton'><%=@user.username%></button>
-          <div class='dropdown-content'>
-            <a class='dropdown-btn' href='/'>Homepage</a>
-            <a class='dropdown-btn' href='/myaccount'>My Account</a>
-            <a class='dropdown-btn' id='create-listing'>Create Listing</a>
-            <a class='dropdown-btn' href='/?logout=true'>Logout</a>
-          </div>
+        <div id='myaccount'>
+          My Account
         </div>
-
+        <div class='add-listing'>
+          <h1> Insert Your Listing </h1>
+          <form action='/listing' method="post" enctype="multipart/form-data">
+            Listing name: <input type="text" name="list_name" required><br>
+            Description: <input type="text" name="short_description" required><br>
+            Price per night: <input type="text" name="price_per_night" required><br>
+            Add image: <input type="file" name="datafile">
+            <input type='submit' value='Add listing'>
+          </form>
+          </form>
+        </div>
       <% end %>
+    </div>
 
-      <% unless @user.logged_in %>
+    <% if @user.logged_in %>
 
-      <div class='user-buttons'>
-
-        <div class='log-in-buttons'>
-          <button class="dropbtn" id='login-btn'>Log in</button>
-          <button class="dropbtn" id='register-btn'>Register</button><br>
-          <%= @log_in_action %>
-        </div>
-
-        <div class='log-in-forms' id="log-in">
-          <br>
-          <form action='/log-in' method="post">
-            Email: <input type="text" name="log_in_email" placeholder="Email" required>
-            Password: <input type="password" name="log_in_password" minlength="8" required>
-            <input class="btn" type="submit" value='log in'>
-          </form>
-        </div>
-
-        <div class='log-in-forms' id='sign-up'>
-          <br>
-          <form action="/sign-up" method="post">
-            Username: <input type="text" name="username" placeholder="username" required>
-            Email: <input type="text" name="email" placeholder="E-mail" required>
-            Password: <input type="password" name="password" minlength="8" required>
-            <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
-          </form>
+      <div class='drop-down-container'>
+        <button class='dropbtn' id='userbutton'><%=@user.username%></button>
+        <div class='dropdown-content'>
+          <a class='dropdown-btn' href='/'>Homepage</a>
+          <a class='dropdown-btn' href='/myaccount'>My Account</a>
+          <a class='dropdown-btn' id='create-listing'>Create Listing</a>
+          <a class='dropdown-btn' href='/?logout=true'>Logout</a>
         </div>
       </div>
-      <% end %>
 
-    </header>
+    <% end %>
+
+    <% unless @user.logged_in %>
+
+    <div class='user-buttons'>
+
+      <div class='log-in-buttons'>
+        <button class="dropbtn" id='login-btn'>Log in</button>
+        <button class="dropbtn" id='register-btn'>Register</button><br>
+        <%= @log_in_action %>
+      </div>
+
+      <div class='log-in-forms' id="log-in">
+        <br>
+        <form action='/log-in' method="post">
+          Email: <input type="text" name="log_in_email" placeholder="Email" required>
+          Password: <input type="password" name="log_in_password" minlength="8" required>
+          <input class="btn" type="submit" value='log in'>
+        </form>
+      </div>
+
+      <div class='log-in-forms' id='sign-up'>
+        <br>
+        <form action="/sign-up" method="post">
+          Username: <input type="text" name="username" placeholder="username" required>
+          Email: <input type="text" name="email" placeholder="E-mail" required>
+          Password: <input type="password" name="password" minlength="8" required>
+          <input class="btn" id="sign_up" type="submit" value='Sign up' placeholder='Sign up'>
+        </form>
+      </div>
+    </div>
+    <% end %>
+
+  </header>
 
   <% if @user.logged_in %>
 
@@ -195,14 +195,14 @@
                     </div>
                   </div>
 
-                  <div class='chat-container'>
+                  <!-- <div class='chat-container'> -->
                     <div class='chat'>
                       <div class='chatbox'></div>
                       <textarea class='add-message' placeholder='add message here'></textarea>
                       <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Add Message</button>
                       <button class='close-messaging-btn'>Close Messaging</button>
                     </div>
-                  </div>
+                  <!-- </div> -->
 
                 </div>
               <% end %>
