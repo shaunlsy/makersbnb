@@ -288,11 +288,13 @@ body {
   position: relative;
   display: flex;
   flex-wrap: nowrap;
+  width: 100%;
 }
 
 .chat {
   position: relative;
   display: none;
+  width: 100%;
 }
 
 .messaging-btn {
@@ -301,13 +303,15 @@ body {
 }
 
 .close-messaging-btn {
+  position: relative;
+  float: right;
 }
 
 .chatbox {
   position: relative;
   width: 100%;
   overflow: scroll;
-  height: 200px;
+  min-height: 250px;
 }
 
 .add-message {
@@ -322,13 +326,28 @@ body {
   float: left;
   height: 50px;
   width: 50px;
-
 }
 
 .message-time {
-  font-size: 40%;
+  position: relative;
+  font-size: 15px;
 }
 
 .message-body {
-  font-size: 70%;
+  position: relative;
+  width: 50%;
+}
+
+.user-1-message {
+  background-color: white;
+  float: right;
+  font-align: right;
+  font-size: 20px;
+}
+
+.user-2-message {
+  background-color: #54C7FC;
+  float: left;
+  font-align: left;
+  font-size: 20px;
 }

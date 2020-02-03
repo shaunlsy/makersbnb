@@ -1,160 +1,155 @@
-window.addEventListener("load", function() {
-    $(document).ready(function() {
+$(document).ready(function() {
+  // Display buttons
 
-        $("#mylistingsbtn").click(function() {
-            $("#bookings").css('display', 'none');
-            $("#trips").css('display', 'none');
-            $("#listings").css('display', 'block');
-        })
-
-        $("#mybookingsbtn").click(function() {
-          $("#listings").css('display', 'none');
-          $("#trips").css('display', 'none');
-          $("#bookings").css('display', 'block');
-          console.log(test)
-        })
-
-        $("#mytripsbtn").click(function() {
-            $("#bookings").css('display', 'none');
-            $("#listings").css('display', 'none');
-            $("#trips").css('display', 'block');
-        })
-
-        $("#accept-booking").click(function() {
-            var booking_id = $(this).attr('value')
-            $.ajax({
-                url: `booking/${booking_id}`,
-                type: 'PUT',
-                success: function(response) {
-                    console.log(`clicked ${booking_id}`)
-                    console.log(response)
-                }
-            })
-            $(`#${booking_id}`).fadeToggle()
-        })
-
-        $("#decline-booking").click(function() {
-            var booking_id = $(this).attr('value')
-            $.ajax({
-                url: `booking/${booking_id}`,
-                type: 'DELETE',
-                success: function(response) {
-                    console.log(`clicked ${booking_id}`)
-                    console.log(response)
-                }
-            })
-            $(`#${booking_id}`).fadeToggle()
-        })
-
-        $('.send-message').click(function(){
-          var user_1 = $(this).attr('data_user_1')
-          var user_2 = $(this).attr('data_user_2')
-          var booking_id = $(this).attr('data_booking_id')
-          var text = $(`#add-message${booking_id}`).val()
-          var data = {'user_1': user_1, 'user_2': user_2, 'message': text}
-          $.post('/message', JSON.stringify(data))
-          updateChat(user_1, user_2, booking_id)
-          updateChat(user_1, user_2, booking_id)
-          $(`#add-message${booking_id}`).val('')
-        })
-
-        $('.close-messaging-btn').click(function(){
-          var booking_id = $(this).attr('id')
-          $(`#chat${booking_id}`).hide()
-          $('.messaging-btn').show()
-        })
-
-
-
-    $('.messaging-btn').click(function(){
-      window.user_1 = $(this).attr('data_user_1')
-      window.user_2 = $(this).attr('data_user_2')
-      window.booking_id = $(this).attr('data_booking_id')
-      $(this).hide()
-      $(`#chat${booking_id}`).fadeToggle()
-      $(`#chatbox${booking_id}`).empty()
-
-      var length = updateChat(user_1, user_2, booking_id)
-    })
-
-
-
-    var updateChat = function(user_1, user_2, booking_id) {
-            var length = $.get(`message/${user_1}/${user_2}`, function(data) {
-                var jsonData = JSON.parse(data)
-                var length = jsonData.length
-                jsonData.forEach(function(message) {
-                    var style = function() {
-                        if (message['sender_id'] == user_1) {
-                            return 'float: right;background: white;'
-                        } else {
-                            return 'float: left;background: blue;'
-                        }
-                    }
-                    var dateobj = new Date(message['time_inserted']);
-                    $(
-                        `
-                        <div class='message_time' style=''>
-                          ${dateobj.toUTCString()}
-                        </div>
-                        <div class='message' style='${style()}' >
-                          <div class='message_body'>
-                          ${message['message']}
-                          </div>
-                        </div>
-                        `
-                    ).prependTo($(`#chatbox${booking_id}`))
-                })
-                return length
-            })
-            return length
-
-        }
-
-
-
-    })
+  $("#mylistingsbtn").click(function() {
+    $("#bookings").css('display', 'none');
+    $("#trips").css('display', 'none');
+    $("#listings").css('display', 'block');
   })
 
+  $("#mybookingsbtn").click(function() {
+    $("#listings").css('display', 'none');
+    $("#trips").css('display', 'none');
+    $("#bookings").css('display', 'block');
+  })
+
+  $("#mytripsbtn").click(function() {
+    $("#bookings").css('display', 'none');
+    $("#listings").css('display', 'none');
+    $("#trips").css('display', 'block');
+  })
+
+  // Booking managment
+
+  $("#accept-booking").click(function() {
+    var booking_id = $(this).attr('value')
+    $.ajax({
+      url: `booking/${booking_id}`,
+      type: 'PUT',
+      success: function(response) {
+        console.log(`clicked ${booking_id}`)
+        console.log(response)
+      }
+    })
+    $(`#${booking_id}`).fadeToggle()
+  })
+
+  $("#decline-booking").click(function() {
+    var booking_id = $(this).attr('value')
+    $.ajax({
+      url: `booking/${booking_id}`,
+      type: 'DELETE',
+      success: function(response) {
+        console.log(`clicked ${booking_id}`)
+        console.log(response)
+      }
+    })
+    $(`#${booking_id}`).fadeToggle()
+  })
+})
+
+// Chat functionality
+
+// xmlGET
+var httpGet = function(theUrl, callback) {
+  var xmlHttp = new XMLHttpRequest()
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      callback(xmlHttp.responseText)
+  }
+  xmlHttp.open("GET", theUrl, true)
+  xmlHttp.send(null)
+}
+// ===========
 
 
+// xmlPOST
+var httpPost = function(theUrl, data) {
+  var xmlHttp = new XMLHttpRequest()
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+      console.log(xmlHttp.responseText)
+  }
+  xmlHttp.open("POST", theUrl, true)
+  xmlHttp.send(data)
+}
+// ===========
 
 
-  // var updateMe = function(user_1, user_2, booking_id, length) {
-  //   setInterval(function(user_1, user_2, booking_id, length) {
+// Send message
+var sendMessageObjs = document.getElementsByClassName("send-message")
 
-  //     $.get(`message/${user_1}/${user_2}`, function(data) {
+var sendMessage = function(){
+  var user_1 = this.getAttribute('data_user_1')
+  var user_2 = this.getAttribute('data_user_2')
+  var parent = this.parentNode
+  var textbox = parent.querySelector('.add-message')
+  var text = textbox.value
+  textbox.value = ''
+  var data = {'user_1': user_1, 'user_2': user_2, 'message': text}
+  httpPost('/message', JSON.stringify(data))
+}
 
-  //       var jsonData = JSON.parse(data)
-  //       var newLength = jsonData.length
-  //       var difference = newLength - length
-  //       if (difference == 0) {
-  //         return
-  //       }
-  //       jsonData = jsonData.slice(-1 * difference)
-  //       length = newLength
-  //       jsonData.forEach(function(message) {
-  //           var style = function() {
-  //               if (message['sender_id'] == user_1) {
-  //                   return 'float: right;background: white;'
-  //               } else {
-  //                   return 'float: left;background: blue;'
-  //               }
-  //           }
-  //           var dateobj = new Date(message['time_inserted']);
-  //           $(`#chatbox${booking_id}`).append(
-  //               `
-  //               <div class='message_time' style=''>
-  //                 ${dateobj.toUTCString()}
-  //               </div>
-  //               <div class='message' style='${style()}' >
-  //                 <div class='message_body'>
-  //                 ${message['message']}
-  //                 </div>
-  //               </div>
-  //               `
-  //           )
-  //       })
-  //   })
-  // }, 1000)
-  // }
+for (var i = 0; i < sendMessageObjs.length; i++) {
+    sendMessageObjs[i].addEventListener('click', sendMessage, false)
+}
+// ===========
+
+
+// Messaging button
+var messagingBtnObjs = document.getElementsByClassName("messaging-btn")
+
+var startChat = function() {
+  var user_1 = this.getAttribute('data_user_1')
+  var user_2 = this.getAttribute('data_user_2')
+  var listing = this.parentNode.parentNode.parentNode
+  var chat = listing.querySelector('.chat')
+  var chatbox = listing.querySelector('.chatbox')
+
+  chatbox.innerHTML = "";
+  chat.style.display = "block";
+  this.style.display = "none";
+
+  var dataLength = { num: 0 }
+
+  var chatPoll = setInterval(function() {
+    httpGet(`message/${user_1}/${user_2}`, function(data) {
+      var jsonData = JSON.parse(data)
+      var newLength = jsonData.length
+      var difference = newLength - dataLength.num
+      dataLength.num = newLength
+      if (difference == 0) { return }
+      jsonData = jsonData.slice(-1 * difference)
+      jsonData.forEach(function(message) {
+        var messageClass = (message['sender_id'] == user_1 ? 'user-1-message' : 'user-2-message')
+        var dateStr = (new Date(message['time_inserted'])).toUTCString()
+        chatbox.innerHTML += (
+          `<div class='message_time' style=''>
+            ${dateStr}
+          </div>
+          <div class='${messageClass}'>
+            <div class='message_body'>
+            ${message['message']}
+            </div>
+          </div>`
+        )
+      })
+      chatbox.scrollTop = chatbox.scrollHeight;
+    })
+  }, 500)
+
+  // Close messaging button
+  var closeChatBtn = listing.querySelector('.close-messaging-btn')
+  var closeMessaging = function(){
+    var messagingBtn = listing.querySelector('.messaging-btn')
+    clearInterval(chatPoll)
+    chat.style.display = "none"
+    messagingBtn.style.display = "block"
+  }
+  closeChatBtn.addEventListener('click', closeMessaging, false)
+  // ===========
+}
+
+for (var i = 0; i < messagingBtnObjs.length; i++) {
+  messagingBtnObjs[i].addEventListener('click', startChat, false)
+}

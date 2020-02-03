@@ -98,7 +98,7 @@
         <h2> My Listings </h2>
 
         <div class='display-listings'>
-          <% @mylistings.each_with_index do |listing, i| %>
+          <% @mylistings.each do |listing| %>
 
             <div class='listing'>
               <div class='listing-full' id='<%=listing.list_id%>'>
@@ -117,7 +117,6 @@
           <% end %>
         </div>
       </div>
-
 
       <div class='mylistings' id='bookings'>
         <h2> My Bookings </h2>
@@ -146,17 +145,17 @@
                       Total price: £<%= booking.total_price%>
                     </div>
 
-                    <div class='messaging-btn'>
-                      <button class='messaging-btn' id='messaging<%= booking.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Messaging</button>
+                    <div class='messaging-btn-div'>
+                      <button class='messaging-btn' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Messaging</button>
                     </div>
                   </div>
 
                   <div class='chat-container'>
-                    <div class='chat' id='chat<%=booking.booking_id%>'>
-                      <div class='chatbox' id="chatbox<%=booking.booking_id%>"></div>
-                      <textarea class='add-message' id='add-message<%=booking.booking_id%>' placeholder='add message here'></textarea>
-                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Add Message</button>
-                      <button class='close-messaging-btn' id='<%= booking.booking_id%>'>Close Messaging</button>
+                    <div class='chat'>
+                      <div class='chatbox'></div>
+                      <textarea class='add-message' placeholder='Add message here...'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Add Message</button>
+                      <button class='close-messaging-btn'>Close Messaging</button>
                     </div>
                   </div>
 
@@ -191,17 +190,17 @@
                       Total price: £<%= booking.total_price%>
                     </div>
 
-                    <div class='messaging-btn'>
-                      <button class='messaging-btn' id='messaging<%= booking.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Messaging</button>
+                    <div class='messaging-btn-div'>
+                      <button class='messaging-btn' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Messaging</button>
                     </div>
                   </div>
 
                   <div class='chat-container'>
-                    <div class='chat' id='chat<%=booking.booking_id%>'>
-                      <div class='chatbox' id="chatbox<%=booking.booking_id%>"></div>
-                      <textarea class='add-message' id='add-message<%=booking.booking_id%>' placeholder='add message here'></textarea>
-                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>' data_booking_id='<%= booking.booking_id%>'>Add Message</button>
-                      <button class='close-messaging-btn' id='<%= booking.booking_id%>'>Close Messaging</button>
+                    <div class='chat'>
+                      <div class='chatbox'></div>
+                      <textarea class='add-message' placeholder='add message here'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=booking.user_id%>'>Add Message</button>
+                      <button class='close-messaging-btn'>Close Messaging</button>
                     </div>
                   </div>
 
@@ -241,17 +240,17 @@
                       Total price: £<%= trip.total_price%>
                     </div>
 
-                    <div class='messaging-btn'>
-                      <button class='messaging-btn' id='messaging<%= trip.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Messaging</button>
+                    <div class='messaging-btn-div'>
+                      <button class='messaging-btn' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>'>Messaging</button>
                     </div>
                   </div>
 
                   <div class='chat-container'>
-                    <div class='chat' id='chat<%=trip.booking_id%>'>
-                      <div class='chatbox' id="chatbox<%=trip.booking_id%>"></div>
-                      <textarea class='add-message' id='add-message<%=trip.booking_id%>'></textarea>
-                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Add Message</button>
-                      <button class='close-messaging-btn' id='<%= trip.booking_id%>'>Close Messaging</button>
+                    <div class='chat'>
+                      <div class='chatbox'></div>
+                      <textarea class='add-message'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>'>Add Message</button>
+                      <button class='close-messaging-btn'>Close Messaging</button>
                     </div>
                   </div>
 
@@ -287,17 +286,17 @@
                       Total price: £<%= trip.total_price%>
                     </div>
 
-                    <div class='messaging-btn'>
-                      <button class='messaging-btn' id='messaging<%= trip.booking_id%>' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Messaging</button>
+                    <div class='messaging-btn-div'>
+                      <button class='messaging-btn' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>'>Messaging</button>
                     </div>
                   </div>
 
                   <div class='chat-container'>
-                    <div class='chat' id='chat<%=trip.booking_id%>'>
-                      <div class='chatbox' id="chatbox<%=trip.booking_id%>"></div>
-                      <textarea class='add-message' id='add-message<%=trip.booking_id%>'></textarea>
-                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>' data_booking_id='<%= trip.booking_id%>'>Add Message</button>
-                      <button class='close-messaging-btn' id='<%= trip.booking_id%>'>Close Messaging</button>
+                    <div class='chat'>
+                      <div class='chatbox'></div>
+                      <textarea class='add-message'></textarea>
+                      <button class='send-message' data_user_1='<%=@user.user_id%>' data_user_2='<%=trip.user_id%>'>Add Message</button>
+                      <button class='close-messaging-btn'>Close Messaging</button>
                     </div>
                   </div>
 
