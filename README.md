@@ -34,7 +34,6 @@ The webapp has been developed on Sinatra, a rack based platform, so to install c
 The rake command will install the DBMS 'postgresql', install required gems, remove any old Makersbnb databases and then create new ones for the project.
 
 
-
 ## Customer Requirements
 
 ### User Stories
